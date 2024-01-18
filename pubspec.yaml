@@ -12,6 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.0.1
+  path: any
   flutter_localizations:
     sdk: flutter
 
@@ -30,3 +32,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/VSCodeShortcuts/

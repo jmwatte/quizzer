@@ -1,0 +1,50 @@
+{
+  "category": "Navigating within a File in VSCode",
+  "shortcuts": [
+    {
+      "action": "Go to Beginning of Line",
+      "shortcut": "Home",
+      "note": "Move the cursor to the beginning of the line"
+    },
+    {
+      "action": "Go to End of Line",
+      "shortcut": "End",
+      "note": "Move the cursor to the end of the line"
+    },
+    {
+      "action": "Go to Beginning of File",
+      "shortcut": "Ctrl+Home",
+      "note": "Move the cursor to the beginning of the file"
+    },
+    {
+      "action": "Go to End of File",
+      "shortcut": "Ctrl+End",
+      "note": "Move the cursor to the end of the file"
+    },
+    {
+      "action": "Go to Next Word",
+      "shortcut": "Ctrl+Right",
+      "note": "Move the cursor to the beginning of the next word"
+    },
+    {
+      "action": "Go to Previous Word",
+      "shortcut": "Ctrl+Left",
+      "note": "Move the cursor to the beginning of the previous word"
+    },
+    {
+      "action": "Go to Line",
+      "shortcut": "Ctrl+G",
+      "note": "Jump to a specific line in the current file"
+    },
+    {
+      "action": "Scroll Line Up",
+      "shortcut": "Ctrl+Up",
+      "note": "Scroll the view up by one line"
+    },
+    {
+      "action": "Scroll Line Down",
+      "shortcut": "Ctrl+Down",
+      "note": "Scroll the view down by one line"
+    }
+  ]
+}

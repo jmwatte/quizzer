@@ -1,0 +1,77 @@
+[
+  {
+    "category": "Multicursor and Selection in VSCode",
+    "shortcuts": [
+      {
+        "action": "Add Cursor Above",
+        "shortcut": "Ctrl+Alt+Up",
+        "note": "Add a new cursor above the current line"
+      },
+      {
+        "action": "Add Cursor Below",
+        "shortcut": "Ctrl+Alt+Down",
+        "note": "Add a new cursor below the current line"
+      },
+      {
+        "action": "Add Cursors to Line Ends",
+        "shortcut": "Ctrl+Shift+I",
+        "note": "Add a cursor at the end of each line in the current selection"
+      },
+      {
+        "action": "Select All Occurrences of Find Match",
+        "shortcut": "Ctrl+Shift+L",
+        "note": "Select all occurrences of the current search input"
+      }
+    ]
+  },
+  {
+    "category": "File Management in VSCode",
+    "shortcuts": [
+      {
+        "action": "New File",
+        "shortcut": "Ctrl+N",
+        "note": "Create a new file"
+      },
+      {
+        "action": "Open File",
+        "shortcut": "Ctrl+O",
+        "note": "Open an existing file"
+      },
+      {
+        "action": "Save",
+        "shortcut": "Ctrl+S",
+        "note": "Save the current file"
+      },
+      {
+        "action": "Save As",
+        "shortcut": "Ctrl+Shift+S",
+        "note": "Save the current file under a new name"
+      }
+    ]
+  },
+  {
+    "category": "Debugging in VSCode",
+    "shortcuts": [
+      {
+        "action": "Start Debugging",
+        "shortcut": "F5",
+        "note": "Start a debugging session"
+      },
+      {
+        "action": "Step Over",
+        "shortcut": "F10",
+        "note": "Step over the current line of code"
+      },
+      {
+        "action": "Step Into",
+        "shortcut": "F11",
+        "note": "Step into the function call on the current line of code"
+      },
+      {
+        "action": "Step Out",
+        "shortcut": "Shift+F11",
+        "note": "Step out of the current function"
+      }
+    ]
+  }
+]
