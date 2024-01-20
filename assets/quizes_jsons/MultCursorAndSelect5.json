@@ -1,75 +1,75 @@
 [
   {
     "category": "Multicursor and Selection in VSCode",
-    "shortcuts": [
+    "quiz": [
       {
-        "action": "Add Cursor Above",
-        "shortcut": "Ctrl+Alt+Up",
+        "question": "Add Cursor Above",
+        "answer": "Ctrl+Alt+Up",
         "note": "Add a new cursor above the current line"
       },
       {
-        "action": "Add Cursor Below",
-        "shortcut": "Ctrl+Alt+Down",
+        "question": "Add Cursor Below",
+        "answer": "Ctrl+Alt+Down",
         "note": "Add a new cursor below the current line"
       },
       {
-        "action": "Add Cursors to Line Ends",
-        "shortcut": "Ctrl+Shift+I",
+        "question": "Add Cursors to Line Ends",
+        "answer": "Ctrl+Shift+I",
         "note": "Add a cursor at the end of each line in the current selection"
       },
       {
-        "action": "Select All Occurrences of Find Match",
-        "shortcut": "Ctrl+Shift+L",
+        "question": "Select All Occurrences of Find Match",
+        "answer": "Ctrl+Shift+L",
         "note": "Select all occurrences of the current search input"
       }
     ]
   },
   {
     "category": "File Management in VSCode",
-    "shortcuts": [
+    "quiz": [
       {
-        "action": "New File",
-        "shortcut": "Ctrl+N",
+        "question": "New File",
+        "answer": "Ctrl+N",
         "note": "Create a new file"
       },
       {
-        "action": "Open File",
-        "shortcut": "Ctrl+O",
+        "question": "Open File",
+        "answer": "Ctrl+O",
         "note": "Open an existing file"
       },
       {
-        "action": "Save",
-        "shortcut": "Ctrl+S",
+        "question": "Save",
+        "answer": "Ctrl+S",
         "note": "Save the current file"
       },
       {
-        "action": "Save As",
-        "shortcut": "Ctrl+Shift+S",
+        "question": "Save As",
+        "answer": "Ctrl+Shift+S",
         "note": "Save the current file under a new name"
       }
     ]
   },
   {
     "category": "Debugging in VSCode",
-    "shortcuts": [
+    "quiz": [
       {
-        "action": "Start Debugging",
-        "shortcut": "F5",
+        "question": "Start Debugging",
+        "answer": "F5",
         "note": "Start a debugging session"
       },
       {
-        "action": "Step Over",
-        "shortcut": "F10",
+        "question": "Step Over",
+        "answer": "F10",
         "note": "Step over the current line of code"
       },
       {
-        "action": "Step Into",
-        "shortcut": "F11",
+        "question": "Step Into",
+        "answer": "F11",
         "note": "Step into the function call on the current line of code"
       },
       {
-        "action": "Step Out",
-        "shortcut": "Shift+F11",
+        "question": "Step Out",
+        "answer": "Shift+F11",
         "note": "Step out of the current function"
       }
     ]

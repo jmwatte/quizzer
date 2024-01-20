@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:quizzer/src/sample_feature/sample_item.dart';
+import 'package:quizzer/src/sample_feature/helpers.dart';
+import 'package:quizzer/src/sample_feature/quiz_question.dart';
 
 class ResultsScreen extends StatelessWidget {
   final String category;
-  final Map<Shortcut, int> correctAnswers;
-  final Map<Shortcut, int> incorrectAnswers;
-  final Map<Shortcut, Duration> correctAnswersTimes;
-  final Map<Shortcut, Duration> incorrectAnswersTimes;
-  final Map<Shortcut, Duration> questionTimes;
+  final Map<QuizQuestion, int> correctAnswers;
+  final Map<QuizQuestion, int> incorrectAnswers;
+  final Map<QuizQuestion, Duration> correctAnswersTimes;
+  final Map<QuizQuestion, Duration> incorrectAnswersTimes;
+  final Map<QuizQuestion, Duration> questionTimes;
   final Duration totalTime;
 
   const ResultsScreen({
@@ -18,8 +19,8 @@ class ResultsScreen extends StatelessWidget {
     required this.incorrectAnswersTimes,
     required this.questionTimes,
     required this.totalTime,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     var sortedEntries = questionTimes.entries.toList()
@@ -38,7 +39,7 @@ class ResultsScreen extends StatelessWidget {
           var incorrectTime = incorrectAnswersTimes[entry.key];
           return ListTile(
             title: Text(
-                '${entry.key.shortcut} - ${entry.key.action}: ${formatDuration(entry.value)}'),
+                '${entry.key.answer} - ${entry.key.question}: ${formatDuration(entry.value)}'),
             subtitle: incorrectAttempts != null
                 ? Text(
                     'Incorrect attempts: $incorrectAttempts (${formatDuration(incorrectTime!)})\nCorrect after: ${formatDuration(correctTime!)}')

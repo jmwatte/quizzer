@@ -1,319 +1,319 @@
 {
     "category": "Navigating within a File in VSCode",
-    "shortcuts": [
+    "quiz": [
         {
-            "action": "Accept First Quick Fix",
-            "shortcut": "Ctrl+. then Enter",
+            "question": "Accept First Quick Fix",
+            "answer": "Ctrl+. then Enter",
             "note": "Open the quick fix menu and accept the first suggestion"
         },
         {
-            "action": "Find All References",
-            "shortcut": "Shift+F12",
+            "question": "Find All References",
+            "answer": "Shift+F12",
             "note": "Find all references to the current symbol in the workspace"
         },
         {
-            "action": "Rename Symbol",
-            "shortcut": "F2",
+            "question": "Rename Symbol",
+            "answer": "F2",
             "note": "Rename a symbol and update all references to it in the file"
         },
         {
-            "action": "Go to Definition",
-            "shortcut": "F12",
+            "question": "Go to Definition",
+            "answer": "F12",
             "note": "Go to the definition of the symbol under the cursor"
         },
         {
-            "action": "Peek Definition",
-            "shortcut": "Alt+F12",
+            "question": "Peek Definition",
+            "answer": "Alt+F12",
             "note": "Peek the definition of the symbol under the cursor"
         },
         {
-            "action": "Go to Type Definition",
-            "shortcut": "F12",
+            "question": "Go to Type Definition",
+            "answer": "F12",
             "note": "Go to the type definition of the symbol under the cursor"
         },
         {
-            "action": "Peek Type Definition",
-            "shortcut": "Ctrl+Shift+F12",
+            "question": "Peek Type Definition",
+            "answer": "Ctrl+Shift+F12",
             "note": "Peek the type definition of the symbol under the cursor"
         },
         {
-            "action": "Go to Implementation",
-            "shortcut": "Ctrl+F12",
+            "question": "Go to Implementation",
+            "answer": "Ctrl+F12",
             "note": "Go to the implementation of the symbol under the cursor"
         },
         {
-            "action": "Peek Implementation",
-            "shortcut": "Ctrl+Shift+F12",
+            "question": "Peek Implementation",
+            "answer": "Ctrl+Shift+F12",
             "note": "Peek the implementation of the symbol under the cursor"
         },
         {
-            "action": "Go to Line",
-            "shortcut": "Ctrl+G",
+            "question": "Go to Line",
+            "answer": "Ctrl+G",
             "note": "Go to a specific line in the current file"
         },
         {
-            "action": "Go to File",
-            "shortcut": "Ctrl+P",
+            "question": "Go to File",
+            "answer": "Ctrl+P",
             "note": "Go to a specific file in the workspace"
         },
         {
-            "action": "Go to Symbol",
-            "shortcut": "Ctrl+Shift+O",
+            "question": "Go to Symbol",
+            "answer": "Ctrl+Shift+O",
             "note": "Go to a specific symbol in the current file"
         },
         {
-            "action": "Go to Next Problem",
-            "shortcut": "F8",
+            "question": "Go to Next Problem",
+            "answer": "F8",
             "note": "Go to the next problem in the current file"
         },
         {
-            "action": "Go to Previous Problem",
-            "shortcut": "Shift+F8",
+            "question": "Go to Previous Problem",
+            "answer": "Shift+F8",
             "note": "Go to the previous problem in the current file"
         },
         {
-            "action": "Go to Next Error",
-            "shortcut": "Ctrl+Shift+F8",
+            "question": "Go to Next Error",
+            "answer": "Ctrl+Shift+F8",
             "note": "Go to the next error in the current file"
         },
         {
-            "action": "Go to Previous Error",
-            "shortcut": "Ctrl+Shift+F8",
+            "question": "Go to Previous Error",
+            "answer": "Ctrl+Shift+F8",
             "note": "Go to the previous error in the current file"
         },
         {
-            "action": "Go to Next Warning",
-            "shortcut": "Ctrl+Shift+F8",
+            "question": "Go to Next Warning",
+            "answer": "Ctrl+Shift+F8",
             "note": "Go to the next warning in the current file"
         },
         {
-            "action": "Toggle Terminal",
-            "shortcut": "Ctrl+`",
+            "question": "Toggle Terminal",
+            "answer": "Ctrl+`",
             "note": "Open or close the terminal"
         },
         {
-            "action": "Toggle Sidebar",
-            "shortcut": "Ctrl+B",
+            "question": "Toggle Sidebar",
+            "answer": "Ctrl+B",
             "note": "Show or hide the sidebar"
         },
         {
-            "action": "Go to File...",
-            "shortcut": "Ctrl+P",
+            "question": "Go to File...",
+            "answer": "Ctrl+P",
             "note": "Quickly navigate to a file"
         },
         {
-            "action": "Go to Line...",
-            "shortcut": "Ctrl+G",
+            "question": "Go to Line...",
+            "answer": "Ctrl+G",
             "note": "Go to a specific line in the current file"
         },
         {
-            "action": "Find in File",
-            "shortcut": "Ctrl+F",
+            "question": "Find in File",
+            "answer": "Ctrl+F",
             "note": "Find a specific text in the current file"
         },
         {
-            "action": "Find in All Files",
-            "shortcut": "Ctrl+Shift+F",
+            "question": "Find in All Files",
+            "answer": "Ctrl+Shift+F",
             "note": "Find a specific text in all files"
         },
         {
-            "action": "Replace in File",
-            "shortcut": "Ctrl+H",
+            "question": "Replace in File",
+            "answer": "Ctrl+H",
             "note": "Replace a specific text in the current file"
         },
         {
-            "action": "Replace in All Files",
-            "shortcut": "Ctrl+Shift+H",
+            "question": "Replace in All Files",
+            "answer": "Ctrl+Shift+H",
             "note": "Replace a specific text in all files"
         },
         {
-            "action": "Save File",
-            "shortcut": "Ctrl+S",
+            "question": "Save File",
+            "answer": "Ctrl+S",
             "note": "Save the current file"
         },
         {
-            "action": "Save All Files",
-            "shortcut": "Ctrl+K S",
+            "question": "Save All Files",
+            "answer": "Ctrl+K S",
             "note": "Save all open files"
         },
         {
-            "action": "Toggle Full Screen",
-            "shortcut": "F11",
+            "question": "Toggle Full Screen",
+            "answer": "F11",
             "note": "Switch between full screen and normal mode"
         },
         {
-            "action": "Toggle Zen Mode",
-            "shortcut": "Ctrl+K Z",
+            "question": "Toggle Zen Mode",
+            "answer": "Ctrl+K Z",
             "note": "Switch to a distraction free coding environment"
         },
         {
-            "action": "Split Editor",
-            "shortcut": "Ctrl+\\",
+            "question": "Split Editor",
+            "answer": "Ctrl+\\",
             "note": "Split the editor into multiple panes"
         },
         {
-            "action": "Switch Editor",
-            "shortcut": "Ctrl+1/2/3",
+            "question": "Switch Editor",
+            "answer": "Ctrl+1/2/3",
             "note": "Switch between open editors"
         },
         {
-            "action": "Close Editor",
-            "shortcut": "Ctrl+W",
+            "question": "Close Editor",
+            "answer": "Ctrl+W",
             "note": "Close the current editor"
         },
         {
-            "action": "Reopen Closed Editor",
-            "shortcut": "Ctrl+Shift+T",
+            "question": "Reopen Closed Editor",
+            "answer": "Ctrl+Shift+T",
             "note": "Reopen the last closed editor"
         },
         {
-            "action": "Show All Commands",
-            "shortcut": "Ctrl+Shift+P",
+            "question": "Show All Commands",
+            "answer": "Ctrl+Shift+P",
             "note": "Show all available commands"
         },
         {
-            "action": "Show Extensions",
-            "shortcut": "Ctrl+Shift+X",
+            "question": "Show Extensions",
+            "answer": "Ctrl+Shift+X",
             "note": "Show installed extensions"
         },
         {
-            "action": "Show Explorer",
-            "shortcut": "Ctrl+Shift+E",
+            "question": "Show Explorer",
+            "answer": "Ctrl+Shift+E",
             "note": "Show the file explorer"
         },
         {
-            "action": "Show Source Control",
-            "shortcut": "Ctrl+Shift+G",
+            "question": "Show Source Control",
+            "answer": "Ctrl+Shift+G",
             "note": "Show the source control panel"
         },
         {
-            "action": "Toggle Integrated Terminal",
-            "shortcut": "Ctrl+`",
+            "question": "Toggle Integrated Terminal",
+            "answer": "Ctrl+`",
             "note": "Show or hide the integrated terminal"
         },
         {
-            "action": "New Terminal",
-            "shortcut": "Ctrl+Shift+`",
+            "question": "New Terminal",
+            "answer": "Ctrl+Shift+`",
             "note": "Create a new terminal instance"
         },
         {
-            "action": "Close Terminal",
-            "shortcut": "Ctrl+Shift+W",
+            "question": "Close Terminal",
+            "answer": "Ctrl+Shift+W",
             "note": "Close the current terminal instance"
         },
         {
-            "action": "Switch Terminal",
-            "shortcut": "Ctrl+1/2/3",
+            "question": "Switch Terminal",
+            "answer": "Ctrl+1/2/3",
             "note": "Switch between terminal instances"
         },
         {
-            "action": "Copy Line Up/Down",
-            "shortcut": "Alt+Shift+Up/Down",
+            "question": "Copy Line Up/Down",
+            "answer": "Alt+Shift+Up/Down",
             "note": "Copy the current line up or down"
         },
         {
-            "action": "Move Line Up/Down",
-            "shortcut": "Alt+Up/Down",
+            "question": "Move Line Up/Down",
+            "answer": "Alt+Up/Down",
             "note": "Move the current line up or down"
         },
         {
-            "action": "Add Line Comment",
-            "shortcut": "Ctrl+/",
+            "question": "Add Line Comment",
+            "answer": "Ctrl+/",
             "note": "Add a line comment to the current line"
         },
         {
-            "action": "Add Block Comment",
-            "shortcut": "Shift+Alt+A",
+            "question": "Add Block Comment",
+            "answer": "Shift+Alt+A",
             "note": "Add a block comment around the current selection"
         },
         {
-            "action": "Remove Comment",
-            "shortcut": "Ctrl+/",
+            "question": "Remove Comment",
+            "answer": "Ctrl+/",
             "note": "Remove comment from the current line or selection"
         },
         {
-            "action": "Expand Selection",
-            "shortcut": "Shift+Alt+Right",
+            "question": "Expand Selection",
+            "answer": "Shift+Alt+Right",
             "note": "Expand the current selection to the next logical unit"
         },
         {
-            "action": "Shrink Selection",
-            "shortcut": "Shift+Alt+Left",
+            "question": "Shrink Selection",
+            "answer": "Shift+Alt+Left",
             "note": "Shrink the current selection to the previous logical unit"
         },
         {
-            "action": "Jump to Matching Bracket",
-            "shortcut": "Ctrl+Shift+\\",
+            "question": "Jump to Matching Bracket",
+            "answer": "Ctrl+Shift+\\",
             "note": "Jump between matching brackets"
         },
         {
-            "action": "Select All Occurrences",
-            "shortcut": "Ctrl+Shift+L",
+            "question": "Select All Occurrences",
+            "answer": "Ctrl+Shift+L",
             "note": "Select all occurrences of the current selection"
         },
         {
-            "action": "Select All Occurrences of Find Match",
-            "shortcut": "Ctrl+F2",
+            "question": "Select All Occurrences of Find Match",
+            "answer": "Ctrl+F2",
             "note": "Select all occurrences of the current selection"
         },
         {
-            "action": "Select Next Occurrence",
-            "shortcut": "Ctrl+D",
+            "question": "Select Next Occurrence",
+            "answer": "Ctrl+D",
             "note": "Select the next occurrence of the current selection"
         },
         {
-            "action": "Select Next Occurrence of Find Match",
-            "shortcut": "F2",
+            "question": "Select Next Occurrence of Find Match",
+            "answer": "F2",
             "note": "Select the next occurrence of the current selection"
         },
         {
-            "action": "Select All",
-            "shortcut": "Ctrl+A",
+            "question": "Select All",
+            "answer": "Ctrl+A",
             "note": "Select the entire file"
         },
         {
-            "action": "Select Line",
-            "shortcut": "Ctrl+L",
+            "question": "Select Line",
+            "answer": "Ctrl+L",
             "note": "Select the current line"
         },
         {
-            "action": "Select Word",
-            "shortcut": "Ctrl+D",
+            "question": "Select Word",
+            "answer": "Ctrl+D",
             "note": "Select the current word"
         },
         {
-            "action": "Select to Line Start",
-            "shortcut": "Shift+Home",
+            "question": "Select to Line Start",
+            "answer": "Shift+Home",
             "note": "Select to the start of the current line"
         },
         {
-            "action": "Select to Line End",
-            "shortcut": "Shift+End",
+            "question": "Select to Line End",
+            "answer": "Shift+End",
             "note": "Select to the end of the current line"
         },
         {
-            "action": "Select to File Start",
-            "shortcut": "Ctrl+Shift+Home",
+            "question": "Select to File Start",
+            "answer": "Ctrl+Shift+Home",
             "note": "Select to the start of the file"
         },
         {
-            "action": "Select to File End",
-            "shortcut": "Ctrl+Shift+End",
+            "question": "Select to File End",
+            "answer": "Ctrl+Shift+End",
             "note": "Select to the end of the file"
         },
         {
-            "action": "Select to Bracket",
-            "shortcut": "Ctrl+Shift+\\",
+            "question": "Select to Bracket",
+            "answer": "Ctrl+Shift+\\",
             "note": "Select to the matching bracket"
         },
         {
-            "action": "Select to Next Bracket",
-            "shortcut": "Ctrl+Shift+]",
+            "question": "Select to Next Bracket",
+            "answer": "Ctrl+Shift+]",
             "note": "Select to the next bracket"
         },
         {
-            "action": "Select to Previous Bracket",
-            "shortcut": "Ctrl+Shift+[",
+            "question": "Select to Previous Bracket",
+            "answer": "Ctrl+Shift+[",
             "note": "Select to the previous bracket"    
         }
     ]

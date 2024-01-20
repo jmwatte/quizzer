@@ -1,54 +1,54 @@
 {
   "category": "Navigating around VSCode",
-  "shortcuts": [
+  "quiz": [
     {
-      "action": "Go to File",
-      "shortcut": "Ctrl+P",
+      "question": "Go to File",
+      "answer": "Ctrl+P",
       "note": "Jump to a specific file in your workspace"
     },
     {
-      "action": "Go to Line",
-      "shortcut": "Ctrl+G",
+      "question": "Go to Line",
+      "answer": "Ctrl+G",
       "note": "Jump to a specific line in the current file"
     },
     {
-      "action": "Go to Symbol in File",
-      "shortcut": "Ctrl+Shift+O",
+      "question": "Go to Symbol in File",
+      "answer": "Ctrl+Shift+O",
       "note": "Navigate to a specific symbol (like a function or variable) in the current file"
     },
     {
-      "action": "Go to Symbol in Workspace",
-      "shortcut": "Ctrl+T",
+      "question": "Go to Symbol in Workspace",
+      "answer": "Ctrl+T",
       "note": "Navigate to a specific symbol in the entire workspace"
     },
     {
-      "action": "Go to Definition",
-      "shortcut": "F12",
+      "question": "Go to Definition",
+      "answer": "F12",
       "note": "Navigate to the definition of the symbol under the cursor"
     },
     {
-      "action": "Go Back / Go Forward",
-      "shortcut": "Alt+Left / Alt+Right",
+      "question": "Go Back / Go Forward",
+      "answer": "Alt+Left / Alt+Right",
       "note": "Navigate back or forward in the editor history"
     },
     {
-      "action": "Switch Editor",
-      "shortcut": "Ctrl+Tab",
+      "question": "Switch Editor",
+      "answer": "Ctrl+Tab",
       "note": "Switch between open files in the order they were last accessed"
     },
     {
-      "action": "Next Error or Warning",
-      "shortcut": "F8",
+      "question": "Next Error or Warning",
+      "answer": "F8",
       "note": "Navigate to the next error or warning in the file"
     },
     {
-      "action": "Previous Error or Warning",
-      "shortcut": "Shift+F8",
+      "question": "Previous Error or Warning",
+      "answer": "Shift+F8",
       "note": "Navigate to the previous error or warning in the file"
     },
     {
-      "action": "Reveal Active File in Side Bar",
-      "shortcut": "Alt+Shift+R",
+      "question": "Reveal Active File in Side Bar",
+      "answer": "Alt+Shift+R",
       "note": "Highlight the currently active file in the Explorer pane"
     }
   ]

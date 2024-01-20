@@ -1,39 +1,39 @@
 {
   "category": "Hiding and Showing Panes in VSCode",
-  "shortcuts": [
+  "quiz": [
     {
-      "action": "Toggle Sidebar Visibility",
-      "shortcut": "Ctrl+B",
+      "question": "Toggle Sidebar Visibility",
+      "answer": "Ctrl+B",
       "note": "Show or hide the sidebar"
     },
     {
-      "action": "Toggle Panel Visibility",
-      "shortcut": "Ctrl+J",
+      "question": "Toggle Panel Visibility",
+      "answer": "Ctrl+J",
       "note": "Show or hide the panel (output, debug console, terminal, etc.)"
     },
     {
-      "action": "Toggle Integrated Terminal",
-      "shortcut": "Ctrl+`",
+      "question": "Toggle Integrated Terminal",
+      "answer": "Ctrl+`",
       "note": "Show or hide the integrated terminal"
     },
     {
-      "action": "Toggle Full Screen",
-      "shortcut": "F11",
+      "question": "Toggle Full Screen",
+      "answer": "F11",
       "note": "Switch between full screen and normal mode"
     },
     {
-      "action": "Toggle Zen Mode",
-      "shortcut": "Ctrl+K Z",
+      "question": "Toggle Zen Mode",
+      "answer": "Ctrl+K Z",
       "note": "Switch between Zen Mode (distraction free mode) and normal mode"
     },
     {
-      "action": "Focus on Editor Group",
-      "shortcut": "Ctrl+1 / Ctrl+2 / Ctrl+3",
+      "question": "Focus on Editor Group",
+      "answer": "Ctrl+1 / Ctrl+2 / Ctrl+3",
       "note": "Focus on the first, second, or third editor group"
     },
     {
-      "action": "Focus on Sidebar",
-      "shortcut": "Ctrl+0",
+      "question": "Focus on Sidebar",
+      "answer": "Ctrl+0",
       "note": "Focus on the sidebar"
     }
   ]

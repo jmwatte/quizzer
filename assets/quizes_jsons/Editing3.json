@@ -1,49 +1,49 @@
 {
   "category": "Editing in VSCode",
-  "shortcuts": [
+  "quiz": [
     {
-      "action": "Cut Line (empty selection)",
-      "shortcut": "Ctrl+X",
+      "question": "Cut Line (empty selection)",
+      "answer": "Ctrl+X",
       "note": "Cut the current line or selected text"
     },
     {
-      "action": "Copy Line (empty selection)",
-      "shortcut": "Ctrl+C",
+      "question": "Copy Line (empty selection)",
+      "answer": "Ctrl+C",
       "note": "Copy the current line or selected text"
     },
     {
-      "action": "Paste",
-      "shortcut": "Ctrl+V",
+      "question": "Paste",
+      "answer": "Ctrl+V",
       "note": "Paste the clipboard content"
     },
     {
-      "action": "Undo",
-      "shortcut": "Ctrl+Z",
+      "question": "Undo",
+      "answer": "Ctrl+Z",
       "note": "Undo the last action"
     },
     {
-      "action": "Redo",
-      "shortcut": "Ctrl+Y",
+      "question": "Redo",
+      "answer": "Ctrl+Y",
       "note": "Redo the last undone action"
     },
     {
-      "action": "Find",
-      "shortcut": "Ctrl+F",
+      "question": "Find",
+      "answer": "Ctrl+F",
       "note": "Find text in the current file"
     },
     {
-      "action": "Replace",
-      "shortcut": "Ctrl+H",
+      "question": "Replace",
+      "answer": "Ctrl+H",
       "note": "Replace text in the current file"
     },
     {
-      "action": "Find Next",
-      "shortcut": "F3",
+      "question": "Find Next",
+      "answer": "F3",
       "note": "Find the next occurrence of the current search input"
     },
     {
-      "action": "Find Previous",
-      "shortcut": "Shift+F3",
+      "question": "Find Previous",
+      "answer": "Shift+F3",
       "note": "Find the previous occurrence of the current search input"
     }
   ]

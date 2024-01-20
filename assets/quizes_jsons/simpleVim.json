@@ -1,0 +1,386 @@
+[
+    {
+        "category": "SimpleVim:Operators",
+        "quiz": [
+            {
+                "question": "Delete range.",
+                "answer": "d"
+            },
+            {
+                "question": "Delete range and enter insert mode.",
+                "answer": "c"
+            },
+            {
+                "question": "Yank range.",
+                "answer": "y"
+            },
+            {
+                "question": "Yank and delete range.",
+                "answer": "r"
+            },
+            {
+                "question": "Select range and enter Visual mode.",
+                "answer": "s"
+            }
+        ]
+    },
+    {
+        "category": "SimpleVim:OperatorRanges",
+        "quiz": [
+            {
+                "question": "Character under cursor.",
+                "answer": "l"
+            },
+            {
+                "question": "Character to the left of cursor.",
+                "answer": "h"
+            },
+            {
+                "question": "Current line and line above.",
+                "answer": "k"
+            },
+            {
+                "question": "Current line and line below.",
+                "answer": "j"
+            },
+            {
+                "question": "From cursor to beginning of next word.",
+                "answer": "w"
+            },
+            {
+                "question": "From cursor to beginning of next word (including punctuation).",
+                "answer": "W"
+            },
+            {
+                "question": "From cursor to beginning of previous word.",
+                "answer": "b"
+            },
+            {
+                "question": "From cursor to beginning of previous word (including punctuation).",
+                "answer": "B"
+            },
+            {
+                "question": "From cursor to end of next word.",
+                "answer": "e"
+            },
+            {
+                "question": "From cursor to end of next word (including punctuation).",
+                "answer": "E"
+            },
+            {
+                "question": "Word under cursor.",
+                "answer": "iw"
+            },
+            {
+                "question": "Word (including punctuation) under cursor.",
+                "answer": "iW"
+            },
+            {
+                "question": "Word under cursor and whitespace after.",
+                "answer": "aw"
+            },
+            {
+                "question": "Word (including punctuation) under cursor and whitespace after.",
+                "answer": "aW"
+            },
+            {
+                "question": "From cursor to next occurrence (case sensitive) of .",
+                "answer": "f<char><char>"
+            },
+            {
+                "question": "From cursor to previous occurrence (case sensitive) of .",
+                "answer": "F<char><char>"
+            },
+            {
+                "question": "From cursor to next occurrence (case sensitive) of .",
+                "answer": "t<char>"
+            },
+            {
+                "question": "From cursor to previous occurrence (case sensitive) of .",
+                "answer": "T<char>"
+            },
+            {
+                "question": "From current line to first line of the document.",
+                "answer": "gg"
+            },
+            {
+                "question": "From current line to last line of the document.",
+                "answer": "G"
+            },
+            {
+                "question": "From current line to beginning of next paragraph.",
+                "answer": "}"
+            },
+            {
+                "question": "From current line to beginning of previous paragraph.",
+                "answer": "{"
+            },
+            {
+                "question": "Current paragraph.",
+                "answer": "ip"
+            },
+            {
+                "question": "Current paragraph and whitespace after.",
+                "answer": "ap"
+            },
+            {
+                "question": "Inside the matching <bracket>s. Where <bracket> is a quote or opening bracket character (any of '\"`({[<).",
+                "answer": "i<bracket>"
+            },
+            {
+                "question": "Outside the matching <bracket>s. Where <bracket> is a quote or opening bracket character (any of '\"`({[<).",
+                "answer": "a<bracket>"
+            },
+            {
+                "question": "Inside XML tag.",
+                "answer": "it"
+            },
+            {
+                "question": "Outside XML tag.",
+                "answer": "at"
+            },
+            {
+                "question": "Inside indentation level.",
+                "answer": "ii"
+            }
+        ]
+    },
+    {
+        "category": "SimpleVim:Motions",
+        "quiz": [
+            {
+                "question": "Character right.",
+                "answer": "l"
+            },
+            {
+                "question": "Character left.",
+                "answer": "h"
+            },
+            {
+                "question": "Line up.",
+                "answer": "k"
+            },
+            {
+                "question": "Line down.",
+                "answer": "j"
+            },
+            {
+                "question": "Word right.",
+                "answer": "w"
+            },
+            {
+                "question": "Word (including punctuation) right.",
+                "answer": "W"
+            },
+            {
+                "question": "Word left.",
+                "answer": "b"
+            },
+            {
+                "question": "Word (including punctuation) left.",
+                "answer": "B"
+            },
+            {
+                "question": "Word end right.",
+                "answer": "e"
+            },
+            {
+                "question": "Word end (including punctuation) right.",
+                "answer": "E"
+            },
+            {
+                "question": "Next occurrence (case sensitive) of .",
+                "answer": "f<char><char>"
+            },
+            {
+                "question": "Previous occurrence (case sensitive) of .",
+                "answer": "F<char><char>"
+            },
+            {
+                "question": "Next occurrence (case sensitive) of .",
+                "answer": "t<char>"
+            },
+            {
+                "question": "Previous occurrence (case sensitive) of .",
+                "answer": "T<char>"
+            },
+            {
+                "question": "First line of the document.",
+                "answer": "gg"
+            },
+            {
+                "question": "Last line of the document.",
+                "answer": "G"
+            },
+            {
+                "question": "Down a paragraph.",
+                "answer": "}"
+            },
+            {
+                "question": "Up a paragraph.",
+                "answer": "{"
+            },
+            {
+                "question": "End of line.",
+                "answer": "$"
+            },
+            {
+                "question": "Beginning of line.",
+                "answer": "_"
+            },
+            {
+                "question": "Top of screen.",
+                "answer": "H"
+            },
+            {
+                "question": "Middle of screen.",
+                "answer": "M"
+            },
+            {
+                "question": "Bottom of screen.",
+                "answer": "L"
+            }
+        ]
+    },
+    {
+        "category": "SimpleVim:Actions",
+        "quiz": [
+            {
+                "question": "Enter Insert mode.",
+                "answer": "i"
+            },
+            {
+                "question": "Move to beginning of line and enter Insert mode.",
+                "answer": "I"
+            },
+            {
+                "question": "Move one character to the right and enter Insert mode.",
+                "answer": "a"
+            },
+            {
+                "question": "Move to end of line and enter Insert mode.",
+                "answer": "A"
+            },
+            {
+                "question": "Enter VisualCharacter mode.",
+                "answer": "v"
+            },
+            {
+                "question": "Enter VisualLine mode.",
+                "answer": "V"
+            },
+            {
+                "question": "Enter Normal mode.",
+                "answer": "Escape"
+            },
+            {
+                "question": "Insert line below and enter insert mode.",
+                "answer": "o"
+            },
+            {
+                "question": "Insert line above and enter insert mode.",
+                "answer": "O"
+            },
+            {
+                "question": "Put yanked text after cursor.",
+                "answer": "p"
+            },
+            {
+                "question": "Put yanked text before cursor.",
+                "answer": "P"
+            },
+            {
+                "question": "Select the result of the last p or P actions and enter Visual mode.",
+                "answer": "gp"
+            },
+            {
+                "question": "Undo.",
+                "answer": "u"
+            },
+            {
+                "question": "Redo.",
+                "answer": "Ctrl+r"
+            },
+            {
+                "question": "Delete current line.",
+                "answer": "dd"
+            },
+            {
+                "question": "Delete to the end of the line.",
+                "answer": "D"
+            },
+            {
+                "question": "Delete current line and enter Insert mode.",
+                "answer": "cc"
+            },
+            {
+                "question": "Delete to the end of the line and enter Insert mode.",
+                "answer": "C"
+            },
+            {
+                "question": "Yank current line.",
+                "answer": "yy"
+            },
+            {
+                "question": "Yank to the end of the line.",
+                "answer": "Y"
+            },
+            {
+                "question": "Yank current line and delete it.",
+                "answer": "rr"
+            },
+            {
+                "question": "Yank to the end of the line and delete it.",
+                "answer": "R"
+            },
+            {
+                "question": "Select current line.",
+                "answer": "ss"
+            },
+            {
+                "question": "Select to the end of the line.",
+                "answer": "S"
+            },
+            {
+                "question": "Delete character.",
+                "answer": "x"
+            },
+            {
+                "question": "Scroll so that cursor is at the top of the screen.",
+                "answer": "zt"
+            },
+            {
+                "question": "Scroll so that cursor is in the middle of the screen.",
+                "answer": "zz"
+            },
+            {
+                "question": "Scroll so that cursor is at the bottom of the screen.",
+                "answer": "zb"
+            },
+            {
+                "question": "Scroll down half page.",
+                "answer": "Ctrl+d"
+            },
+            {
+                "question": "Scroll up half page.",
+                "answer": "Ctrl+u"
+            },
+            {
+                "question": "Scroll down full page.",
+                "answer": "Ctrl+f"
+            },
+            {
+                "question": "Scroll up full page.",
+                "answer": "Ctrl+b"
+            },
+            {
+                "question": "Repeat the last f, F, t or T motion forward.",
+                "answer": ";"
+            },
+            {
+                "question": "Repeat the last f, F, t or T motion backward.",
+                "answer": ","
+            }
+        ]
+    }
+]

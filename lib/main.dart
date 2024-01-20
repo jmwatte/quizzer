@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizzer/src/sample_feature/changnotifiers.dart';
+import 'package:quizzer/src/sample_feature/helpers.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
@@ -19,9 +19,16 @@ void main() async {
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
   runApp(
-     ChangeNotifierProvider(
-      create: (context) => CategoryProvider(),
-      child:MyApp(settingsController: settingsController),
-      ),
-    );
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => QuizManager(),
+        ),
+      ],
+      child: MyApp(settingsController: settingsController),
+    ),
+  );
 }
