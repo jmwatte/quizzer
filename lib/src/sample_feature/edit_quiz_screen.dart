@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_reorderable_list/flutter_reorderable_list.dart';
 import 'package:provider/provider.dart';
 import 'package:quizzer/src/sample_feature/helpers.dart';
 import 'package:quizzer/src/sample_feature/quiz_categories.dart';
@@ -45,6 +46,36 @@ class EditQuizScreenState extends State<EditQuizScreen> {
     ));
   }
 
+  void _onReorder(int oldIndex, int newIndex) {
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+
+    final oldQuestions = List<QuizQuestion>.from(item.quizQuestions);
+
+    final QuizQuestion question = item.quizQuestions.removeAt(oldIndex);
+    item.quizQuestions.insert(newIndex, question);
+
+    final newQuestions = List<QuizQuestion>.from(item.quizQuestions);
+    cs.add(Change<List<QuizQuestion>>(
+      oldQuestions,
+      () {
+        setState(() {
+          item.quizQuestions = newQuestions;
+        });
+      },
+      (oldQuestions) {
+        setState(() {
+          item.quizQuestions = oldQuestions;
+        });
+      },
+      description: 'Reorder questions',
+    ));
+  }
+
+// int _findIndexOfKey(Key key) {
+//   return item.quizQuestions.indexWhere((question) => Key(question.hashCode.toString()) == key);
+// }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,30 +129,17 @@ class EditQuizScreenState extends State<EditQuizScreen> {
               }),
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: TextEditingController(text: item.category),
-              onChanged: (value) {
-                setState(() {
-                  item.category = value;
-                });
-              },
-              decoration: const InputDecoration(
-                labelText: 'Category',
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.only(
-                  bottom: 80.0), // Add padding at the bottom
-              itemCount: item.quizQuestions.length,
-              itemBuilder: (context, index) {
-                final question = item.quizQuestions[index];
-                return Padding(
+      body: ReorderableListView(
+        onReorder: _onReorder,
+        children: item.quizQuestions
+            .map((question) => ListTile(
+                key: Key(question.hashCode.toString()),
+                title:
+
+//this is the item that will be dragged
+
+                    Padding(
+                  // first and last attributes affect border drawn during dragging
                   padding: const EdgeInsets.all(8.0),
                   child: Material(
                     color: Colors.transparent,
@@ -194,11 +212,12 @@ class EditQuizScreenState extends State<EditQuizScreen> {
                       ),
                     ),
                   ),
-                );
-              },
-            ),
-          ),
-        ],
+                )
+
+// till here
+
+                ))
+            .toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
