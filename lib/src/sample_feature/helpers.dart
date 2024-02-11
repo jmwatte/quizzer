@@ -10,19 +10,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CategoryProvider extends ChangeNotifier {
   QuizCategory? selectedCategory;
 
-    void selectCategory(QuizCategory category) {
-        selectedCategory = category;
-        notifyListeners();
-    }
+  void selectCategory(QuizCategory category) {
+    selectedCategory = category;
+    notifyListeners();
+  }
 }
+
 class QuizListProvider extends ChangeNotifier {
   List<QuizCategory> quizzes = [];
 
-Future<void>loadQuizzes() async {
-      var dbHelper = DatabaseHelper();
+  Future<void> loadQuizzes() async {
+    var dbHelper = DatabaseHelper();
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-     bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
+    bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
     //bool isFirstRun = true;
     // var quizesFromJsons = <QuizCategory>[];
     if (isFirstRun) {
@@ -57,9 +58,9 @@ Future<void>loadQuizzes() async {
                 'Quiz at $jsonPath should have more than one question.');
           }
         }
-        }
-      
-        // Save quizzes to the database
+      }
+
+      // Save quizzes to the database
       for (QuizCategory quiz in quizzes) {
         await dbHelper.saveQuizToDatabase(quiz);
       }
@@ -74,18 +75,18 @@ Future<void>loadQuizzes() async {
     notifyListeners();
   }
 
-
   Future<List<QuizCategory>> getQuizzes() async {
     var dbHelper = DatabaseHelper();
     quizzes = await dbHelper.loadQuizzesFromDatabase();
     notifyListeners();
     return quizzes;
   }
-Future<void> loadQuizzesFromDatabase() async {
-  var dbHelper = DatabaseHelper();
-  quizzes = await dbHelper.loadQuizzesFromDatabase();
-  notifyListeners();
-}
+
+  Future<void> loadQuizzesFromDatabase() async {
+    var dbHelper = DatabaseHelper();
+    quizzes = await dbHelper.loadQuizzesFromDatabase();
+    notifyListeners();
+  }
   // void loadQuizzes() async {
   //   var dbHelper = DatabaseHelper();
   //   quizzes = await dbHelper.loadQuizzesFromDatabase();
@@ -110,7 +111,10 @@ String formatDuration(Duration duration) {
   String twoDigits(int n) => n.toString().padLeft(2, '0');
   String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
   String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-  String twoDigitCentiseconds = (duration.inMilliseconds.remainder(1000) / 10).floor().toString().padLeft(2, '0');
+  String twoDigitCentiseconds = (duration.inMilliseconds.remainder(1000) / 10)
+      .floor()
+      .toString()
+      .padLeft(2, '0');
   return "$twoDigitMinutes:$twoDigitSeconds.$twoDigitCentiseconds";
 }
 
@@ -140,16 +144,21 @@ List<Map<String, dynamic>> makeQuiz(String text) {
 
   return categories;
 }
+
 class QuizManager extends ChangeNotifier {
   List<QuizQuestion> copiedQuestions = [];
 
   void copySelected(List<QuizQuestion> selectedQuestions) {
-    copiedQuestions = selectedQuestions.map((question) => QuizQuestion.clone(question)).toList();
+    copiedQuestions = selectedQuestions
+        .map((question) => QuizQuestion.clone(question))
+        .toList();
     notifyListeners();
   }
 
   void pasteCopied(List<QuizQuestion> targetList) {
-    targetList.addAll(copiedQuestions.map((question) => QuizQuestion.clone(question)).toList());
+    targetList.addAll(copiedQuestions
+        .map((question) => QuizQuestion.clone(question))
+        .toList());
     notifyListeners();
   }
 }

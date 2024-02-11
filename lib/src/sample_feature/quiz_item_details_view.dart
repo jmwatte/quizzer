@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quizzer/src/sample_feature/construct_quiz_screen.dart';
 import 'package:quizzer/src/sample_feature/helpers.dart';
 import 'package:quizzer/src/sample_feature/quiz_categories.dart';
 import 'package:quizzer/src/sample_feature/quiz_result_screen.dart';
@@ -271,8 +272,24 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                     textAlign: TextAlign
                         .center, // Center the text within the Text widget
                   ),
-                  onTap: () {
-                    // Add your onTap logic here
+                  onLongPress: () async {
+                    final updatedItem = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ConstructQuizScreen(item: category),
+                      ),
+                    );
+                    if (updatedItem != null) {
+                      setState(() {
+                        // Replace the old
+                        var ql = Provider.of<QuizListProvider>(context,
+                            listen: false);
+                        ql.updateQuiz(updatedItem);
+                        // QuizCategory object with the updated one
+                        category = updatedItem;
+                      });
+                    }
                   },
                 ),
               ),
@@ -310,7 +327,8 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
       ),
     );
   }
-// 
+
+//
   List<QuizQuestion> _generateAnswers() {
     final answers = [currentQuestion];
     final incorrectAnswers = category.quizQuestions

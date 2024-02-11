@@ -26,11 +26,7 @@
       "answer": "Ctrl+Y",
       "note": "Redo the last undone action"
     },
-    {
-      "question": "Find",
-      "answer": "Ctrl+F",
-      "note": "Find text in the current file"
-    },
+   
     {
       "question": "Replace",
       "answer": "Ctrl+H",

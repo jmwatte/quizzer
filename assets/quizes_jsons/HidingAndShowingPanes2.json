@@ -3,17 +3,17 @@
   "quiz": [
     {
       "question": "Toggle Sidebar Visibility",
-      "answer": "Ctrl+B",
+      "answer": "Ctrl+j S",
       "note": "Show or hide the sidebar"
     },
     {
       "question": "Toggle Panel Visibility",
-      "answer": "Ctrl+J",
+      "answer": "Ctrl+j B",
       "note": "Show or hide the panel (output, debug console, terminal, etc.)"
     },
     {
       "question": "Toggle Integrated Terminal",
-      "answer": "Ctrl+`",
+      "answer": "Ctrl+j T",
       "note": "Show or hide the integrated terminal"
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "question": "Toggle Zen Mode",
-      "answer": "Ctrl+K Z",
+      "answer": "Ctrl+j Z",
       "note": "Switch between Zen Mode (distraction free mode) and normal mode"
     },
     {
@@ -35,6 +35,72 @@
       "question": "Focus on Sidebar",
       "answer": "Ctrl+0",
       "note": "Focus on the sidebar"
+    },
+    {
+      "question": "Show Debug Console",
+      "answer": "Ctrl+j D",
+      "note": "Show Debug Console"
+    },
+    {
+      "question": "Show Output Panel",
+      "answer": "Ctrl+j o",
+      "note": "Focus on the Output Panel"
+    },
+    {
+      "question": "Show Problems Panel",
+      "answer": "Ctrl+j p",
+      "note": "Focus on the Problems Panel"
+    },
+    {
+      "question": "Maximize Editor Group",
+      "answer": "Ctrl+j e",
+      "note": "maximize the editor group"
+    },
+    {
+      "question": "Maximize Bottom Panel",
+      "answer": "Ctrl+j x",
+      "note": "Maximize Bottom Panel"
+    },
+    {
+      "question": "Cycle Bottom Panel",
+      "answer": "Ctrl+j Ctrl+j",
+      "note": "Focus on the Bottom Panel"
+    },
+    {
+      "question": "Cycle Side Panel",
+      "answer": "Ctrl+J Ctrl+S",
+      "note": "Cycle the side Panel"
+    },
+    {
+      "question": "nextEditor",
+      "answer": "ctrl+pagedown",
+      "note": "workbench.action.nextEditor"
+    },
+    {
+      "question": "previousEditor",
+      "answer": "ctrl+pageUp",
+      "note": "workbench.action.previousEditor"
+    },
+    {
+      "question": "Cycle Editor",
+      "answer": "Ctrl+E Ctrl+N",
+      "note": "Cycle the EditorsPanel"
+    },
+    {
+      "question": "workbench.action.gotoSymbol",
+      "answer": "ctrl+shift+o",
+      "note": "Go to Symbol in Editor..."
+    },
+    {
+      "question": "workbench.action.experimental.quickTextSearch",
+      "answer": "ctrl+q ctrl+s",
+      "note": "Quick Search experimental "
+    },
+    {
+      "question": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+      "answer": "ctrl+tab",
+      "note": "View: Quick Open Previous Recently Used Editor in Group"
     }
+    
   ]
 }
