@@ -25,8 +25,14 @@ class ResultsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var sortedEntries = questionTimes.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
-
-    return Scaffold(
+return PopScope(
+  onPopInvoked: (popIntent){
+    if (popIntent) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.popUntil(context, ModalRoute.withName('/'));
+      });
+  }},
+  child: Scaffold(
       appBar: AppBar(
         title: Text(category),
       ),
@@ -48,6 +54,6 @@ class ResultsScreen extends StatelessWidget {
           );
         },
       ),
-    );
+    ));
   }
 }

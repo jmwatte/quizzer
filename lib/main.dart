@@ -27,6 +27,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => QuizManager(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => QuizListProvider()..loadQuizzes(),
+        ),
       ],
       child: MyApp(settingsController: settingsController),
     ),

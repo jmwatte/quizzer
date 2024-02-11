@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'settings_service.dart';
 
@@ -46,5 +47,10 @@ class SettingsController with ChangeNotifier {
     // Persist the changes to a local database or the internet using the
     // SettingService.
     await _settingsService.updateThemeMode(newThemeMode);
+  }
+    void resetDatabase() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstRun', true);
+    notifyListeners();
   }
 }

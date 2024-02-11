@@ -9,10 +9,7 @@ import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key,
-    required this.settingsController,
-  });
+  const MyApp({super.key, required this.settingsController});
 
   final SettingsController settingsController;
 
@@ -31,7 +28,7 @@ class MyApp extends StatelessWidget {
           // returns to the app after it has been killed while running in the
           // background.
           restorationScopeId: 'app',
-
+          debugShowCheckedModeBanner: false,
           // Provide the generated AppLocalizations to the MaterialApp. This
           // allows descendant Widgets to display the correct translations
           // depending on the user's locale.
@@ -68,14 +65,17 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
+                    return SettingsView(
+                        controller: settingsController,
+                        onResetDatabase: settingsController.resetDatabase);
                   case QuizItemDetailsView.routeName:
-                    return  QuizItemDetailsView(
+                    return QuizItemDetailsView(
                         onBack: (context) => Navigator.pop(context));
 
                   case QuizItemsListView.routeName:
                   default:
-                    return const QuizItemsListView();
+                    return QuizItemsListView(
+                        settingsController: settingsController);
                 }
               },
             );

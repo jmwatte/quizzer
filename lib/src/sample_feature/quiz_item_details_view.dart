@@ -75,7 +75,6 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
     if (remainingQuestions == null) {
       throw StateError('remainingQuestions is null');
     } else {
-      //TODO instead of random we can have the user select the method random or the way the list is set up or have a list sorted. SOrted by Question or sorted by anser
       switch (category.randomQuestions) {
         case true:
           currentQuestion =
@@ -100,7 +99,6 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
     super.dispose();
   }
 
-//TODO instead of going round till all the questions are asked correctly we can go around 1 through all the questions like a test and see the result for that
   void answerQuestion(QuizQuestion answer) {
     timer?.cancel();
     setState(() {
@@ -280,13 +278,15 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
               ),
             ),
           ),
+          // Iterate over the answers list and create a ListTile for each answer
           ...answers.map((answer) => ListTile(
                 onTap: () => answerQuestion(answer),
+                // Set the tileColor based on the correctness of the answer
                 tileColor: answer == correctAnswer
-                    ? Colors.green
+                    ? Colors.green // Correct answer is green
                     : answer == selectedAnswer
-                        ? Colors.red
-                        : null,
+                        ? Colors.red // Selected answer is red
+                        : null, // Default color for other answers
                 title: ListTile(
                   title: Text(
                     isSwapped ? answer.question : answer.answer,
@@ -297,7 +297,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                   ),
                   subtitle: Text(
                     (isSwapped && answer.note.isNotEmpty)
-                        ? '(${answer.note})'
+                        ? '(${answer.note})' // Show note if answer is swapped and note is not empty
                         : '',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
@@ -310,8 +310,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
       ),
     );
   }
-
-//TODO this is where we can add the logic to randomize the answers
+// 
   List<QuizQuestion> _generateAnswers() {
     final answers = [currentQuestion];
     final incorrectAnswers = category.quizQuestions
