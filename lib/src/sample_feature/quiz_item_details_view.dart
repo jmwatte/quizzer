@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:quizzer/src/sample_feature/construct_quiz_screen.dart';
-import 'package:quizzer/src/sample_feature/helpers.dart';
-import 'package:quizzer/src/sample_feature/quiz_categories.dart';
-import 'package:quizzer/src/sample_feature/quiz_result_screen.dart';
-import 'package:quizzer/src/sample_feature/quiz_question.dart';
+import 'package:watch_it/watch_it.dart';
+import 'construct_quiz_screen.dart';
+import 'helpers.dart';
+import 'quiz_categories.dart';
+import 'quiz_result_screen.dart';
+import 'quiz_question.dart';
 
 typedef ContextCallback = void Function(BuildContext context);
 
-class QuizItemDetailsView extends StatefulWidget {
+class QuizItemDetailsView extends WatchingStatefulWidget {
   final ContextCallback onBack;
   static const routeName = '/quizItem';
 
@@ -62,8 +62,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final selectedCategory =
-        Provider.of<CategoryProvider>(context, listen: false).selectedCategory;
+    final selectedCategory = di<CategoryProvider>().selectedCategory;
     if (selectedCategory == null) {
       throw StateError('No category selected');
     }
@@ -249,28 +248,34 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                   .grey[200], // Change this to your desired background color
               child: Center(
                 child: ListTile(
-                  title: Text(
-                    isSwapped
-                        ? currentQuestion.answer
-                        : currentQuestion.question,
-                    style: const TextStyle(
-                      fontSize: 24, // Change this to your desired font size
-                      fontWeight: FontWeight.bold, // Make the text bold
-                      color: Colors.black, // Change this to your desired color
+                  title: FittedBox(
+                    child: Text(
+                      isSwapped
+                          ? currentQuestion.answer
+                          : currentQuestion.question,
+                      style: const TextStyle(
+                        fontSize: 24, // Change this to your desired font size
+                        fontWeight: FontWeight.bold, // Make the text bold
+                        color:
+                            Colors.black, // Change this to your desired color
+                      ),
+                      textAlign: TextAlign
+                          .center, // Center the text within the Text widget
                     ),
-                    textAlign: TextAlign
-                        .center, // Center the text within the Text widget
                   ),
-                  subtitle: Text(
-                    (!isSwapped && currentQuestion.note.isNotEmpty)
-                        ? '(${currentQuestion.note})'
-                        : '',
-                    style: const TextStyle(
-                      fontSize: 16, // Change this to your desired font size
-                      color: Colors.black, // Change this to your desired color
+                  subtitle: FittedBox(
+                    child: Text(
+                      (!isSwapped && currentQuestion.note.isNotEmpty)
+                          ? '(${currentQuestion.note})'
+                          : '',
+                      style: const TextStyle(
+                        fontSize: 16, // Change this to your desired font size
+                        color:
+                            Colors.black, // Change this to your desired color
+                      ),
+                      textAlign: TextAlign
+                          .center, // Center the text within the Text widget
                     ),
-                    textAlign: TextAlign
-                        .center, // Center the text within the Text widget
                   ),
                   onLongPress: () async {
                     final updatedItem = await Navigator.push(
@@ -283,8 +288,8 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                     if (updatedItem != null) {
                       setState(() {
                         // Replace the old
-                        var ql = Provider.of<QuizListProvider>(context,
-                            listen: false);
+                        var ql = di<QuizListProvider>();
+
                         ql.updateQuiz(updatedItem);
                         // QuizCategory object with the updated one
                         category = updatedItem;
@@ -305,20 +310,25 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                         ? Colors.red // Selected answer is red
                         : null, // Default color for other answers
                 title: ListTile(
-                  title: Text(
-                    isSwapped ? answer.question : answer.answer,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 18, // Change this to your desired font size
+                  title: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Text(
+                      isSwapped ? answer.question : answer.answer,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 18, // Change this to your desired font size
+                      ),
                     ),
                   ),
-                  subtitle: Text(
-                    (isSwapped && answer.note.isNotEmpty)
-                        ? '(${answer.note})' // Show note if answer is swapped and note is not empty
-                        : '',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 16, // Change this to your desired font size
+                  subtitle: FittedBox(
+                    child: Text(
+                      (isSwapped && answer.note.isNotEmpty)
+                          ? '(${answer.note})' // Show note if answer is swapped and note is not empty
+                          : '',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16, // Change this to your desired font size
+                      ),
                     ),
                   ),
                 ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_reorderable_list/flutter_reorderable_list.dart';
-import 'package:watch_it/watch_it.dart';
-import 'database_helpers.dart';
-import 'helpers.dart';
-import 'quiz_categories.dart';
-import 'quiz_question.dart';
+import 'package:quizzer/src/sample_feature/database_helpers.dart';
+import 'package:quizzer/src/sample_feature/helpers.dart';
+import 'package:quizzer/src/sample_feature/quiz_categories.dart';
+import 'package:quizzer/src/sample_feature/quiz_question.dart';
 import 'package:undo/undo.dart';
+import 'package:watch_it/watch_it.dart';
 
 class ConstructQuizScreen extends StatefulWidget {
   final QuizCategory item;

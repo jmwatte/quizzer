@@ -1,15 +1,16 @@
-import 'package:quizzer/src/sample_feature/database_helpers.dart';
+import 'database_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:quizzer/src/sample_feature/quiz_question.dart';
+import 'quiz_question.dart';
+import 'sorting_handler.dart';
 
-enum SortType {
-  original,
-  reversed,
-  question,
-  questionReversed,
-  answer,
-  answerReversed,
-}
+// enum SortType {
+//   original,
+//   reversed,
+//   question,
+//   questionReversed,
+//   answer,
+//   answerReversed,
+// }
 
 class QuizCategory {
   int? id;
@@ -18,16 +19,16 @@ class QuizCategory {
   bool randomQuestions = false;
   bool isTestQuiz = false;
   SortType selectedSortType = SortType.original;
-  TextEditingController  categoryController;
+  TextEditingController categoryController;
 
   QuizCategory(
       {this.id,
-        required this.category,
+      required this.category,
       required this.quizQuestions,
       required this.randomQuestions,
       required this.isTestQuiz,
-      required this.selectedSortType}): categoryController = TextEditingController(text: category);
-
+      required this.selectedSortType})
+      : categoryController = TextEditingController(text: category);
 
   factory QuizCategory.fromJson(Map<String, dynamic> jsonData) {
     List<QuizQuestion> questions = [];
@@ -52,10 +53,11 @@ class QuizCategory {
   }
 
   //get id => null;
- @override
+  @override
   String toString() {
     return 'QuizCategory{id: $id, category: $category, randomQuestions: $randomQuestions, isTestQuiz: $isTestQuiz, selectedSortType: $selectedSortType}';
   }
+
   QuizCategory sortQuiz(SortType sortType) {
     List<QuizQuestion> sortedQuestions;
 
@@ -94,17 +96,17 @@ class QuizCategory {
   }
 
   Map<String, dynamic> toMap() {
-    var map=<String, dynamic>{
+    var map = <String, dynamic>{
       'category': category,
       'randomQuestions': randomQuestions ? 1 : 0,
       'isTestQuiz': isTestQuiz ? 1 : 0,
       'selectedSortType': selectedSortType.index,
-     // 'quizQuestions': jsonEncode(quizQuestions.map((q) => q.toMap()).toList()),
+      // 'quizQuestions': jsonEncode(quizQuestions.map((q) => q.toMap()).toList()),
     };
-if (id != null) {
-    // Only include the id field in the map if it's not null
-    map['id'] = id;
-  }
+    if (id != null) {
+      // Only include the id field in the map if it's not null
+      map['id'] = id;
+    }
 
     return map;
     // return {
@@ -116,11 +118,13 @@ if (id != null) {
     //  // 'quizQuestions': jsonEncode(quizQuestions.map((q) => q.toMap()).toList()),
     // };
   }
+
   static Future<QuizCategory> fromMap(Map<String, dynamic> map) async {
-  var dbHelper = DatabaseHelper();
-    List<QuizQuestion> quizQuestions = await dbHelper.fetchQuizQuestions(map['id']);
+    var dbHelper = DatabaseHelper();
+    List<QuizQuestion> quizQuestions =
+        await dbHelper.fetchQuizQuestions(map['id']);
 //print(map['randomQuestions'] == 1);  // Add this
-  //print(map['isTestQuiz'] == 1); 
+    //print(map['isTestQuiz'] == 1);
     return QuizCategory(
       id: map['id'],
       category: map['category'],

@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
-import 'package:quizzer/src/sample_feature/construct_quiz_screen.dart';
-import 'package:quizzer/src/sample_feature/quiz_categories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../sample_feature/construct_quiz_screen.dart';
+import '../sample_feature/quiz_categories.dart';
+import '../sample_feature/sorting_handler.dart';
 import 'settings_controller.dart';
-import 'package:quizzer/src/sample_feature/helpers.dart';
-import 'package:quizzer/src/sample_feature/database_helpers.dart';
+import '/src/sample_feature/helpers.dart';
+import '/src/sample_feature/database_helpers.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:quizzer/src/sample_feature/helpers.dart';
+import 'helpers.dart';
 
 // List<Map<String, dynamic>> makeQuiz(String text) {
 //   List<String> pieces = text.trim().split(RegExp(r'\n\s*\n'));

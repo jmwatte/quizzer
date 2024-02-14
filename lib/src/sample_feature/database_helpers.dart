@@ -6,8 +6,8 @@ library;
 import 'dart:io' as io;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:quizzer/src/sample_feature/quiz_categories.dart';
-import 'package:quizzer/src/sample_feature/quiz_question.dart';
+import 'quiz_categories.dart';
+import 'quiz_question.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {

@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:path/path.dart' as path;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quizzer/src/sample_feature/database_helpers.dart';
-import 'package:quizzer/src/sample_feature/quiz_categories.dart';
-import 'package:quizzer/src/sample_feature/quiz_question.dart';
+import 'database_helpers.dart';
+import 'quiz_categories.dart';
+import 'quiz_question.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryProvider extends ChangeNotifier {
