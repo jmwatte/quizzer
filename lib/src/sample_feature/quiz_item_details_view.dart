@@ -45,6 +45,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
 
   //bool randomOrNot=true;
   bool isTestQuiz = false;
+  bool _isLongPressing = false;
 
 // Update the timer in initState to update the ValueNotifiers
   @override
@@ -131,7 +132,15 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
     });
 
     Future.delayed(
-      Duration(milliseconds: answer == correctAnswer ? 1000 : 3000),
+      Duration(
+          milliseconds: di<QuizListProvider>().selectedQuestionType ==
+                      QuestionType.study ||
+                  di<QuizListProvider>().selectedQuestionType ==
+                      QuestionType.noChoices
+              ? 0
+              : answer == correctAnswer
+                  ? di<QuizListProvider>().correctAnswerTime
+                  : di<QuizListProvider>().incorrectAnswerTime),
       () {
         setState(() {
           correctAnswer = null;
@@ -241,98 +250,173 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
 
       body: Column(
         children: [
-          Center(
-            child: Container(
-              padding: const EdgeInsets.all(10), // Add some padding
-              color: Colors
-                  .grey[200], // Change this to your desired background color
-              child: Center(
-                child: ListTile(
-                  title: FittedBox(
-                    child: Text(
-                      isSwapped
-                          ? currentQuestion.answer
-                          : currentQuestion.question,
-                      style: const TextStyle(
-                        fontSize: 24, // Change this to your desired font size
-                        fontWeight: FontWeight.bold, // Make the text bold
-                        color:
-                            Colors.black, // Change this to your desired color
-                      ),
-                      textAlign: TextAlign
-                          .center, // Center the text within the Text widget
-                    ),
-                  ),
-                  subtitle: FittedBox(
-                    child: Text(
-                      (!isSwapped && currentQuestion.note.isNotEmpty)
-                          ? '(${currentQuestion.note})'
-                          : '',
-                      style: const TextStyle(
-                        fontSize: 16, // Change this to your desired font size
-                        color:
-                            Colors.black, // Change this to your desired color
-                      ),
-                      textAlign: TextAlign
-                          .center, // Center the text within the Text widget
-                    ),
-                  ),
-                  onLongPress: () async {
-                    final updatedItem = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ConstructQuizScreen(item: category),
-                      ),
-                    );
-                    if (updatedItem != null) {
-                      setState(() {
-                        // Replace the old
-                        var ql = di<QuizListProvider>();
-
-                        ql.updateQuiz(updatedItem);
-                        // QuizCategory object with the updated one
-                        category = updatedItem;
-                      });
-                    }
-                  },
-                ),
+          ListTile(
+            title: Text(
+              isSwapped ? currentQuestion.answer : currentQuestion.question,
+              style: const TextStyle(
+                fontSize: 24, // Change this to your desired font size
+                fontWeight: FontWeight.bold, // Make the text bold
+                color: Colors.black, // Change this to your desired color
               ),
+              textAlign:
+                  TextAlign.center, // Center the text within the Text widget
             ),
+            subtitle: Text(
+              (!isSwapped && currentQuestion.note.isNotEmpty)
+                  ? '(${currentQuestion.note})'
+                  : ' ',
+              style: const TextStyle(
+                fontSize: 16, // Change this to your desired font size
+                color: Colors.black, // Change this to your desired color
+              ),
+              textAlign:
+                  TextAlign.center, // Center the text within the Text widget
+            ),
+            onLongPress: () async {
+              final updatedItem = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ConstructQuizScreen(item: category),
+                ),
+              );
+              if (updatedItem != null) {
+                setState(() {
+                  // Replace the old
+                  var ql = di<QuizListProvider>();
+
+                  ql.updateQuiz(updatedItem);
+                  // QuizCategory object with the updated one
+                  category = updatedItem;
+                });
+              }
+            },
           ),
           // Iterate over the answers list and create a ListTile for each answer
-          ...answers.map((answer) => ListTile(
-                onTap: () => answerQuestion(answer),
+          switch (watchPropertyValue(
+              (QuizListProvider m) => m.selectedQuestionType)) {
+            QuestionType.multipleChoices => Expanded(
+                child: ListView(
+                  children: answers
+                      .map(
+                        (answer) => ListTile(
+                          onTap: () => answerQuestion(answer),
+                          // Set the tileColor based on the correctness of the answer
+                          tileColor: answer == correctAnswer
+                              ? Colors.green // Correct answer is green
+                              : answer == selectedAnswer
+                                  ? Colors.red // Selected answer is red
+                                  : null, // Default color for other answers
+                          title: ListTile(
+                            title: Visibility(
+                              visible: answers.length > 1,
+                              child: Text(
+                                isSwapped ? answer.question : answer.answer,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize:
+                                      18, // Change this to your desired font size
+                                ),
+                              ),
+                            ),
+                            subtitle: Text(
+                              (isSwapped && answer.note.isNotEmpty)
+                                  ? '(${answer.note})' // Show note if answer is swapped and note is not empty
+                                  : ' ',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize:
+                                    16, // Change this to your desired font size
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            QuestionType.study => ListTile(
+                onTap: () => answerQuestion(currentQuestion),
                 // Set the tileColor based on the correctness of the answer
-                tileColor: answer == correctAnswer
-                    ? Colors.green // Correct answer is green
-                    : answer == selectedAnswer
-                        ? Colors.red // Selected answer is red
-                        : null, // Default color for other answers
+                tileColor: Colors.green, // Correct answer is green
+
                 title: ListTile(
-                  title: FittedBox(
-                    fit: BoxFit.fill,
-                    child: Text(
-                      isSwapped ? answer.question : answer.answer,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 18, // Change this to your desired font size
-                      ),
+                  title: Text(
+                    isSwapped
+                        ? currentQuestion.question
+                        : currentQuestion.answer,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 18, // Change this to your desired font size
                     ),
                   ),
-                  subtitle: FittedBox(
-                    child: Text(
-                      (isSwapped && answer.note.isNotEmpty)
-                          ? '(${answer.note})' // Show note if answer is swapped and note is not empty
-                          : '',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16, // Change this to your desired font size
-                      ),
+                  subtitle: Text(
+                    (isSwapped && currentQuestion.note.isNotEmpty)
+                        ? '(${currentQuestion.note})' // Show note if answer is swapped and note is not empty
+                        : ' ',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16, // Change this to your desired font size
                     ),
                   ),
                 ),
-              )),
+              ),
+            QuestionType.noChoices => Expanded(
+                child: Stack(
+                  children: [
+                    _isLongPressing
+                        ? ListTile(
+                            title: Text(
+                              isSwapped
+                                  ? currentQuestion.question
+                                  : currentQuestion.answer,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize:
+                                    18, // Change this to your desired font size
+                              ),
+                            ),
+                            subtitle: Text(
+                              (isSwapped && currentQuestion.note.isNotEmpty)
+                                  ? '(${currentQuestion.note})' // Show note if answer is swapped and note is not empty
+                                  : ' ',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize:
+                                    16, // Change this to your desired font size
+                              ),
+                            ),
+                          )
+                        : Container(),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onLongPressStart: (details) {
+                          setState(() {
+                            _isLongPressing = true;
+                          });
+                        },
+                        onLongPressEnd: (details) {
+                          setState(() {
+                            _isLongPressing = false;
+                          });
+                          answerQuestion(currentQuestion);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 150, // Adjust this to your desired height
+                          color:
+                              Colors.blue, // Adjust this to your desired color
+                          child: const Center(
+                              child: Text("Tap and hold to answer")),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          }
         ],
       ),
     );
@@ -344,22 +428,29 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
     final incorrectAnswers = category.quizQuestions
         .where((shortcut) => shortcut != currentQuestion)
         .toList();
-
-    // Check if there are any incorrect answers
-    if (incorrectAnswers.isNotEmpty) {
-      // First random selection
-      var firstIncorrect =
-          incorrectAnswers.removeAt(Random().nextInt(incorrectAnswers.length));
-      answers.add(firstIncorrect);
-
-      // Second random selection
-      // Make sure the second incorrect answer is not the same as the first one
+    int amountOfAlternatives = di<QuizListProvider>().amountOfAnswers;
+    for (int i = 0; i < amountOfAlternatives; i++) {
       if (incorrectAnswers.isNotEmpty) {
-        var secondIncorrect =
-            incorrectAnswers[Random().nextInt(incorrectAnswers.length)];
-        answers.add(secondIncorrect);
+        var randomAnswer = incorrectAnswers
+            .removeAt(Random().nextInt(incorrectAnswers.length));
+        answers.add(randomAnswer);
       }
     }
+    // Check if there are any incorrect answers
+    // if (incorrectAnswers.isNotEmpty) {
+    //   // First random selection
+    //   var firstIncorrect =
+    //       incorrectAnswers.removeAt(Random().nextInt(incorrectAnswers.length));
+    //   answers.add(firstIncorrect);
+
+    // Second random selection
+    // Make sure the second incorrect answer is not the same as the first one
+    // if (incorrectAnswers.isNotEmpty) {
+    //   var secondIncorrect =
+    //       incorrectAnswers[Random().nextInt(incorrectAnswers.length)];
+    //   answers.add(secondIncorrect);
+    // }
+    //}
 
     answers.shuffle();
     return answers;

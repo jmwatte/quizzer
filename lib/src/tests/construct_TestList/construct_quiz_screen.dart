@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_reorderable_list/flutter_reorderable_list.dart';
-import 'package:quizzer/src/sample_feature/database_helpers.dart';
-import 'package:quizzer/src/sample_feature/helpers.dart';
-import 'package:quizzer/src/sample_feature/quiz_categories.dart';
-import 'package:quizzer/src/sample_feature/quiz_question.dart';
+import '/src/sample_feature/database_helpers.dart';
+import '/src/sample_feature/helpers.dart';
+import '/src/sample_feature/quiz_categories.dart';
+import '/src/sample_feature/quiz_question.dart';
 import 'package:undo/undo.dart';
 import 'package:watch_it/watch_it.dart';
 

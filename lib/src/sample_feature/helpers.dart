@@ -17,7 +17,64 @@ class CategoryProvider extends ChangeNotifier {
 }
 
 class QuizListProvider extends ChangeNotifier {
+  late SharedPreferences prefs;
   List<QuizCategory> quizzes = [];
+  late int _amountOfAnswers;
+  int get amountOfAnswers => _amountOfAnswers;
+  late int _correctAnswerTime;
+  int get correctAnswerTime => _correctAnswerTime;
+  late int _incorrectAnswerTime;
+  int get incorrectAnswerTime => _incorrectAnswerTime;
+  late QuestionType _selectedQuestionStyle;
+  QuestionType get selectedQuestionType => _selectedQuestionStyle;
+
+  set selectedQuestionType(QuestionType selectedQuestionType) {
+    if (selectedQuestionType != _selectedQuestionStyle) {
+      _selectedQuestionStyle = selectedQuestionType;
+      prefs.setInt('selectedQuestionStyle', selectedQuestionType.index);
+      notifyListeners();
+    }
+  }
+
+  set correctAnswerTime(int value) {
+    if (value < 0) {
+      value = 0;
+    }
+    _correctAnswerTime = value;
+    prefs.setInt('correctAnswerTime', value);
+    notifyListeners();
+  }
+
+  set incorrectAnswerTime(int value) {
+    if (value < 0) {
+      value = 0;
+    }
+    _incorrectAnswerTime = value;
+    prefs.setInt('incorrectAnswerTime', value);
+    notifyListeners();
+  }
+
+  set amountOfAnswers(int value) {
+    if (value < 0) {
+      value = 0;
+    }
+    _amountOfAnswers = value;
+    prefs.setInt('amountOfAnswers', value);
+    notifyListeners();
+  }
+
+  QuizListProvider() {
+    loadprefs();
+  }
+  loadprefs() async {
+    prefs = await SharedPreferences.getInstance();
+    _amountOfAnswers = prefs.getInt('amountOfAnswers') ?? 2;
+    _correctAnswerTime = prefs.getInt('correctAnswerTime') ?? 1000;
+    _incorrectAnswerTime = prefs.getInt('incorrectAnswerTime') ?? 2000;
+    _selectedQuestionStyle =
+        QuestionType.values[prefs.getInt('selectedQuestionStyle') ?? 1];
+    notifyListeners();
+  }
 
   Future<void> loadQuizzes() async {
     var dbHelper = DatabaseHelper();
@@ -163,7 +220,6 @@ class QuizManager extends ChangeNotifier {
   }
 }
 
-
 // String getSortTypeSuffix(SortType sortType) {
 //   switch (sortType) {
 //     case SortType.original:
@@ -182,3 +238,61 @@ class QuizManager extends ChangeNotifier {
 //       return '';
 //   }
 // }
+
+String splitLongString(String input) {
+  int middle = 15;
+  int span = 0;
+  String wordgroup = '';
+  var words = input.split(" ");
+  String subword = '';
+  for (var word in words) {
+    if (word.length > middle) {
+      wordgroup += "$word\n";
+      subword = '';
+    } else {
+      if (subword.length + word.length < middle - span) {
+        subword += "$word ";
+      } else {
+        subword += '\n';
+        wordgroup = "$wordgroup$subword";
+        subword = '';
+        subword += "$word ";
+      }
+    }
+    // if (subword.length > middle - span) {
+    //   // This line should append 'subword' to 'wordgroup' and add a newline.
+    //   // However, 'subword' is being reset to an empty string every time it exceeds 'middle - span'.
+    //   // Therefore, if 'subword' is not empty, it should be appended to 'wordgroup'.
+    //   if (subword.isNotEmpty) {
+    //     wordgroup = "$wordgroup$subword\n";
+    //     subword = ''; // Reset 'subword' after adding it to 'wordgroup'.
+    //   }
+    //   // subword = '';
+    // }
+  }
+  if (subword.isNotEmpty) {
+    wordgroup = "$wordgroup$subword";
+  }
+  return wordgroup.trim();
+  // int splitAt = 15;
+  // int splitWidth = 9;
+  // if (input.length <= splitAt) {
+  //   return input;
+  // } else {
+  //   int gr = 1;
+  //   for (int i = 1; i < input.length; i = i + splitAt) {
+  //     var hit =
+  //         input.indexOf(" ", min(input.length, gr * splitAt - splitWidth));
+  //     if (hit == -1) break;
+  //     gr++;
+  //     input = input.replaceFirst(" ", "\n", hit - 2);
+  //   }
+}
+
+enum QuestionType {
+  study,
+  noChoices,
+  multipleChoices,
+}
+// Split the string into substrings
+//return input;
