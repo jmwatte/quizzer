@@ -1,11 +1,11 @@
 {
-    "name": "quizzer",
-    "short_name": "quizzer",
+    "name": "quizzer2",
+    "short_name": "quizzer2",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "questions and answers",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

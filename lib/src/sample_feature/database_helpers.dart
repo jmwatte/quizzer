@@ -4,11 +4,13 @@
 library;
 
 import 'dart:io' as io;
+
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+
 import 'quiz_categories.dart';
 import 'quiz_question.dart';
-import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper.internal();
@@ -36,127 +38,118 @@ class DatabaseHelper {
 
   void _onCreate(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE QuizCategories(id INTEGER PRIMARY KEY, category TEXT, randomQuestions INTEGER, isTestQuiz INTEGER, selectedSortType INTEGER)");
+        "CREATE TABLE Quiz(id INTEGER PRIMARY KEY , title TEXT, randomQuestions INTEGER, isTestQuiz INTEGER, selectedSortType INTEGER)");
     await db.execute(
-        "CREATE TABLE Quizzes(id INTEGER PRIMARY KEY, question TEXT, answer TEXT, note TEXT, categoryId INTEGER, orderindex INTEGER, FOREIGN KEY(categoryId) REFERENCES QuizCategories(id))");
+        "CREATE TABLE Questions(id INTEGER PRIMARY KEY, question TEXT, answer TEXT, note TEXT, quizId INTEGER, orderindex INTEGER, FOREIGN KEY(quizId) REFERENCES Quiz(id))");
   }
 
-  Future<int> saveQuizCategory(QuizCategory quizCategory) async {
+  Future<Quiz?> updateQuiz(Quiz quiz) async {
     var dbClient = await db;
-    int res = await dbClient!.insert("QuizCategories", quizCategory.toMap());
-    quizCategory.id = res;
-    return res;
-  }
-
-  Future<QuizCategory?> updateQuizCategory(QuizCategory quizCategory) async {
-    var dbClient = await db;
-    QuizCategory? updatedQuizCategory;
+    Quiz? updatedQuiz;
 
     int updateRes = await dbClient!.update(
-      "QuizCategories",
-      quizCategory.toMap(),
+      "Quiz",
+      quiz.toMap(),
       where: "id = ?",
-      whereArgs: [quizCategory.id],
+      whereArgs: [quiz.id],
     );
 
     if (updateRes > 0) {
-      await dbClient.delete("Quizzes",
-          where: "categoryId = ?", whereArgs: [quizCategory.id]);
+      await dbClient
+          .delete("Questions", where: "quizId = ?", whereArgs: [quiz.id]);
 
-      for (int i = 0; i < quizCategory.quizQuestions.length; i++) {
-        QuizQuestion quizQuestion = quizCategory.quizQuestions[i];
+      for (int i = 0; i < quiz.quizQuestions.length; i++) {
+        QuizQuestion quizQuestion = quiz.quizQuestions[i];
 
         Map<String, dynamic> quizQuestionMap = quizQuestion.toMap();
-        quizQuestionMap['categoryId'] = quizCategory.id;
+        quizQuestionMap['quizId'] = quiz.id;
         quizQuestionMap['orderindex'] = i;
 
         await dbClient.insert(
-          'Quizzes',
+          'Questions',
           quizQuestionMap,
           conflictAlgorithm: ConflictAlgorithm.replace,
         );
       }
 
       List<Map> maps = await dbClient.query(
-        "QuizCategories",
+        "Quiz",
         columns: [
           "id",
-          "category",
+          "title",
           "randomQuestions",
           "isTestQuiz",
           "selectedSortType"
         ],
         where: "id = ?",
-        whereArgs: [quizCategory.id],
+        whereArgs: [quiz.id],
       );
 
       if (maps.isNotEmpty) {
-        updatedQuizCategory =
-            await QuizCategory.fromMap(maps.first as Map<String, dynamic>);
+        updatedQuiz = await Quiz.fromMap(maps.first as Map<String, dynamic>);
       }
     }
 
-    return updatedQuizCategory;
+    return updatedQuiz;
   }
 
-  Future<int> deleteQuizCategory(int id) async {
+//here we delete the Quizes and all the questions that are in that quiz and have the same categoryId
+  Future<int> deleteQuizAndQuestions(int id) async {
     var dbClient = await db;
-    await dbClient!.delete("QuizCategories", where: "id = ?", whereArgs: [id]);
-    int res = await dbClient
-        .delete("QuizCategories", where: "id = ?", whereArgs: [id]);
+    int res = await dbClient!.delete("Quiz", where: "id = ?", whereArgs: [id]);
+    await dbClient.delete("Questions", where: "quizId = ?", whereArgs: [id]);
     return res;
   }
 
-  Future<void> saveQuizToDatabase(QuizCategory quizCategory) async {
+  Future<void> saveQuizToDatabase(Quiz quiz) async {
     var dbClient = await DatabaseHelper().db;
 
-    int categoryId = await dbClient!.insert(
-      'QuizCategories',
-      quizCategory.toMap(),
+    int quizId = await dbClient!.insert(
+      'Quiz',
+      quiz.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    quizCategory.id = categoryId;
+    quiz.id = quizId;
 
-    for (int i = 0; i < quizCategory.quizQuestions.length; i++) {
-      QuizQuestion quizQuestion = quizCategory.quizQuestions[i];
+    for (int i = 0; i < quiz.quizQuestions.length; i++) {
+      QuizQuestion quizQuestion = quiz.quizQuestions[i];
 
       Map<String, dynamic> quizQuestionMap = quizQuestion.toMap();
-      quizQuestionMap['categoryId'] = categoryId;
+      quizQuestionMap['quizId'] = quizId;
       quizQuestionMap['orderindex'] = i;
 
       await dbClient.insert(
-        'Quizzes',
+        'Questions',
         quizQuestionMap,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
   }
 
-  Future<List<QuizCategory>> loadQuizzesFromDatabase() async {
+  Future<List<Quiz>> loadQuizzesFromDatabase() async {
     var dbClient = await db;
-    List<Map<String, dynamic>> categoryMaps =
-        await dbClient!.query('QuizCategories');
-    List<QuizCategory> quizCategories = [];
+    List<Map<String, dynamic>> quizMaps =
+        await dbClient!.query('Quiz'); //get the
+    List<Quiz> quizes = [];
 
-    for (var categoryMap in categoryMaps) {
-      int categoryId = categoryMap['id'];
-      List<QuizQuestion> quizQuestions = await fetchQuizQuestions(categoryId);
+    for (var quizMap in quizMaps) {
+      int quizId = quizMap['id'];
+      List<QuizQuestion> quizQuestions = await fetchQuizQuestions(quizId);
 
-      QuizCategory quizCategory = await QuizCategory.fromMap(categoryMap);
-      quizCategory.quizQuestions = quizQuestions;
-
-      quizCategories.add(quizCategory);
+      Quiz quiz = await Quiz.fromMap(quizMap);
+      quiz.quizQuestions = quizQuestions;
+      quizes.add(quiz);
     }
 
-    return quizCategories;
+    return quizes;
   }
 
-  Future<List<QuizQuestion>> fetchQuizQuestions(int categoryId) async {
+  Future<List<QuizQuestion>> fetchQuizQuestions(int quizId) async {
     var dbClient = await db;
     List<Map> result = await dbClient!.query(
-      "Quizzes",
-      where: "categoryId = ?",
-      whereArgs: [categoryId],
+      "Questions",
+      where: "quizId = ?",
+      whereArgs: [quizId],
       orderBy: 'orderindex ASC',
     );
 

@@ -8,7 +8,7 @@ import 'package:undo/undo.dart';
 import 'package:watch_it/watch_it.dart';
 
 class ConstructQuizScreen extends StatefulWidget {
-  final QuizCategory item;
+  final Quiz item;
 
   const ConstructQuizScreen({super.key, required this.item});
 
@@ -17,7 +17,7 @@ class ConstructQuizScreen extends StatefulWidget {
 }
 
 class ConstructQuizScreenState extends State<ConstructQuizScreen> {
-  late QuizCategory item;
+  late Quiz item;
   List<QuizQuestion> selectedQuestions = [];
   final cs = ChangeStack();
   @override
@@ -87,14 +87,14 @@ class ConstructQuizScreenState extends State<ConstructQuizScreen> {
     // Save the changes to the database
     var dbHelper = DatabaseHelper();
     var quizListProvider = di<QuizListProvider>();
-    if (item.category.isNotEmpty &&
+    if (item.title.isNotEmpty &&
         item.quizQuestions.length > 1 &&
         item.quizQuestions
             .every((q) => q.question.isNotEmpty && q.answer.isNotEmpty)) {
       if (item.id == null) {
         dbHelper.saveQuizToDatabase(item);
       } else {
-        dbHelper.updateQuizCategory(item);
+        dbHelper.updateQuiz(item);
       }
     }
     // Load the updated list of quizzes from the database
@@ -163,10 +163,10 @@ class ConstructQuizScreenState extends State<ConstructQuizScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              controller: item.categoryController,
+              controller: item.quizTitleController,
               onChanged: (value) {
                 setState(() {
-                  item.category = value;
+                  item.title = value;
                 });
               },
               decoration: const InputDecoration(

@@ -12,27 +12,27 @@ import 'sorting_handler.dart';
 //   answerReversed,
 // }
 
-class QuizCategory {
+class Quiz {
   int? id;
-  String category;
+  String title;
   List<QuizQuestion> quizQuestions;
   bool randomQuestions = false;
   bool isTestQuiz = false;
   SortType selectedSortType = SortType.original;
-  TextEditingController categoryController;
+  TextEditingController quizTitleController;
 
-  QuizCategory(
+  Quiz(
       {this.id,
-      required this.category,
+      required this.title,
       required this.quizQuestions,
       required this.randomQuestions,
       required this.isTestQuiz,
       required this.selectedSortType})
-      : categoryController = TextEditingController(text: category);
+      : quizTitleController = TextEditingController(text: title);
 
-  factory QuizCategory.fromJson(Map<String, dynamic> jsonData) {
+  factory Quiz.fromJson(Map<String, dynamic> jsonData) {
     List<QuizQuestion> questions = [];
-    var questionsFromJson = jsonData['quiz'];
+    var questionsFromJson = jsonData['Questions'];
 
     if (questionsFromJson is List) {
       questions = questionsFromJson
@@ -43,8 +43,8 @@ class QuizCategory {
           QuizQuestion.fromJson(questionsFromJson as Map<String, dynamic>));
     }
 
-    return QuizCategory(
-      category: jsonData['category'],
+    return Quiz(
+      title: jsonData['Quiz'],
       quizQuestions: questions,
       randomQuestions: jsonData['randomQuestions'] == 1,
       isTestQuiz: jsonData['isTestQuiz'] == 1,
@@ -55,10 +55,10 @@ class QuizCategory {
   //get id => null;
   @override
   String toString() {
-    return 'QuizCategory{id: $id, category: $category, randomQuestions: $randomQuestions, isTestQuiz: $isTestQuiz, selectedSortType: $selectedSortType}';
+    return 'Quiz{id: $id, title: $title, randomQuestions: $randomQuestions, isTestQuiz: $isTestQuiz, selectedSortType: $selectedSortType}';
   }
 
-  QuizCategory sortQuiz(SortType sortType) {
+  Quiz sortQuiz(SortType sortType) {
     List<QuizQuestion> sortedQuestions;
 
     switch (sortType) {
@@ -86,8 +86,8 @@ class QuizCategory {
         break;
     }
 
-    return QuizCategory(
-      category: category,
+    return Quiz(
+      title: title,
       quizQuestions: sortedQuestions,
       randomQuestions: randomQuestions,
       isTestQuiz: isTestQuiz,
@@ -97,7 +97,7 @@ class QuizCategory {
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      'category': category,
+      'title': title,
       'randomQuestions': randomQuestions ? 1 : 0,
       'isTestQuiz': isTestQuiz ? 1 : 0,
       'selectedSortType': selectedSortType.index,
@@ -119,15 +119,15 @@ class QuizCategory {
     // };
   }
 
-  static Future<QuizCategory> fromMap(Map<String, dynamic> map) async {
+  static Future<Quiz> fromMap(Map<String, dynamic> map) async {
     var dbHelper = DatabaseHelper();
     List<QuizQuestion> quizQuestions =
         await dbHelper.fetchQuizQuestions(map['id']);
 //print(map['randomQuestions'] == 1);  // Add this
     //print(map['isTestQuiz'] == 1);
-    return QuizCategory(
+    return Quiz(
       id: map['id'],
-      category: map['category'],
+      title: map['title'],
       randomQuestions: map['randomQuestions'] == 1,
       quizQuestions: quizQuestions,
       isTestQuiz: map['isTestQuiz'] == 1,

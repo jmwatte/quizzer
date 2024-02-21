@@ -1,6 +1,6 @@
 {
-  "category": "Search and Replace in VSCode",
-  "quiz": [
+  "Quiz": "Search and Replace in VSCode",
+  "Questions": [
     {
       "question": "Find",
       "answer": "Ctrl+F",

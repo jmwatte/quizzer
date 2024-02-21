@@ -7,18 +7,18 @@ import 'quiz_categories.dart';
 import 'quiz_question.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CategoryProvider extends ChangeNotifier {
-  QuizCategory? selectedCategory;
+class QuizProvider extends ChangeNotifier {
+  Quiz? selectedQuiz;
 
-  void selectCategory(QuizCategory category) {
-    selectedCategory = category;
+  void selectQuiz(Quiz quiz) {
+    selectedQuiz = quiz;
     notifyListeners();
   }
 }
 
 class QuizListProvider extends ChangeNotifier {
   late SharedPreferences prefs;
-  List<QuizCategory> quizzes = [];
+  List<Quiz> quizzes = [];
   late int _amountOfAnswers;
   int get amountOfAnswers => _amountOfAnswers;
   late int _correctAnswerTime;
@@ -34,6 +34,15 @@ class QuizListProvider extends ChangeNotifier {
       prefs.setInt('selectedQuestionStyle', selectedQuestionType.index);
       notifyListeners();
     }
+  }
+
+  /// Adds a new quiz to the list of quizzes.
+  ///
+  /// The [quiz] parameter represents the quiz to be added.
+  /// After adding the quiz, it notifies the listeners.
+  void addQuiz(Quiz quiz) {
+    quizzes.add(quiz);
+    notifyListeners();
   }
 
   set correctAnswerTime(int value) {
@@ -64,6 +73,7 @@ class QuizListProvider extends ChangeNotifier {
   }
 
   QuizListProvider() {
+    // loadQuizzes();
     loadprefs();
   }
   loadprefs() async {
@@ -82,7 +92,6 @@ class QuizListProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
     //bool isFirstRun = true;
-    // var quizesFromJsons = <QuizCategory>[];
     if (isFirstRun) {
       // Get the asset manifest
       final manifestContent = await rootBundle.loadString('AssetManifest.json');
@@ -94,22 +103,25 @@ class QuizListProvider extends ChangeNotifier {
           .where((String key) => key.startsWith('assets/quizes_jsons/'))
           .toList();
 
-      // Load each JSON file and convert it to a ShortcutCategory object
+      // Load each JSON file and convert it to a quiz object
       for (var jsonPath in jsonPaths) {
         final jsonString = await rootBundle.loadString(jsonPath);
         final jsonData = json.decode(jsonString);
 
         if (jsonData is List) {
-          final quizCategoriesJsons = jsonData
-              .map(
-                  (item) => QuizCategory.fromJson(item as Map<String, dynamic>))
+          final quizesJsons = jsonData
+              .map((item) => Quiz.fromJson(item as Map<String, dynamic>))
               .toList();
-          quizzes.addAll(quizCategoriesJsons
-              .where((quiz) => quiz.quizQuestions.length > 1));
+          quizesJsons
+              .where((quiz) => quiz.quizQuestions.length > 1)
+              .forEach((quiz) => addQuiz(quiz));
+          // quizzes.addAll(quizCategoriesJsons
+          //     .where((quiz) => quiz.quizQuestions.length > 1));
         } else if (jsonData is Map) {
-          final quiz = QuizCategory.fromJson(jsonData as Map<String, dynamic>);
+          final quiz = Quiz.fromJson(jsonData as Map<String, dynamic>);
           if (quiz.quizQuestions.length > 1) {
-            quizzes.add(quiz);
+            addQuiz(quiz);
+            //quizzes.add(quiz);
           } else {
             throw Exception(
                 'Quiz at $jsonPath should have more than one question.');
@@ -118,7 +130,7 @@ class QuizListProvider extends ChangeNotifier {
       }
 
       // Save quizzes to the database
-      for (QuizCategory quiz in quizzes) {
+      for (Quiz quiz in quizzes) {
         await dbHelper.saveQuizToDatabase(quiz);
       }
 
@@ -132,13 +144,24 @@ class QuizListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<QuizCategory>> getQuizzes() async {
+  /// Retrieves a list of QuizCategory objects by loading quizzes from the database.
+  ///
+  /// Returns a Future that resolves to a List of QuizCategory objects.
+  /// The list of quizzes is obtained by calling the `loadQuizzesFromDatabase` method
+  /// of the `DatabaseHelper` class. After loading the quizzes, the `notifyListeners`
+  /// method is called to notify any listeners of changes. Finally, the list of quizzes
+  /// is returned.
+  Future<List<Quiz>> getQuizzes() async {
     var dbHelper = DatabaseHelper();
     quizzes = await dbHelper.loadQuizzesFromDatabase();
     notifyListeners();
     return quizzes;
   }
 
+  /// Loads quizzes from the database asynchronously.
+  ///
+  /// This method initializes a [DatabaseHelper] instance and uses it to load quizzes from the database.
+  /// The loaded quizzes are then assigned to the `quizzes` variable and the listeners are notified.
   Future<void> loadQuizzesFromDatabase() async {
     var dbHelper = DatabaseHelper();
     quizzes = await dbHelper.loadQuizzesFromDatabase();
@@ -150,17 +173,52 @@ class QuizListProvider extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addQuiz(QuizCategory quiz) {
-    quizzes.add(quiz);
-    notifyListeners();
-  }
+  // void addQuiz(QuizCategory quiz) {
+  //   quizzes.add(quiz);
+  //   notifyListeners();
+  // }
 
-  void updateQuiz(QuizCategory quiz) {
+  /// Updates the given [quiz] in the list of quizzes.
+  ///
+  /// It searches for the quiz with the same ID as the given [quiz] and replaces it with the updated [quiz].
+  /// After updating the quiz, it notifies the listeners.
+  void updateQuiz(Quiz quiz) {
     int index = quizzes.indexWhere((item) => item.id == quiz.id);
     if (index != -1) {
       quizzes[index] = quiz;
       notifyListeners();
     }
+  }
+
+  /// Saves the [quiz] to the database.
+  ///
+  /// If the [quiz] does not have an ID, it saves the [quiz] category to the database
+  /// and assigns the generated ID to the [quiz]. Otherwise, it updates the existing
+  /// [quiz] category in the database.
+  void saveQuizToDatabase(Quiz quiz) async {
+    var dbHelper = DatabaseHelper();
+    if (quiz.id == null) {
+      await dbHelper.saveQuizToDatabase(quiz);
+    } else {
+      await dbHelper.updateQuiz(quiz);
+    }
+    quizzes = await dbHelper.loadQuizzesFromDatabase();
+    notifyListeners();
+  }
+
+  /// Deletes a quiz from the database.
+  ///
+  /// This function takes a [Quiz] object as a parameter and deletes the corresponding quiz category from the database.
+  /// It uses the [DatabaseHelper] class to perform the deletion operation.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// QuizCategory quiz = QuizCategory(id: 1, name: 'History');
+  /// deleteQuizFromDatabase(quiz);
+  /// ```
+  void deleteQuizFromDatabase(Quiz quiz) async {
+    var dbHelper = DatabaseHelper();
+    await dbHelper.deleteQuizAndQuestions(quiz.id!);
   }
 }
 
@@ -175,31 +233,38 @@ String formatDuration(Duration duration) {
   return "$twoDigitMinutes:$twoDigitSeconds.$twoDigitCentiseconds";
 }
 
+/// Parses a text into a list of quiz categories and their corresponding quizzes.
+///
+/// This function takes a [text] string as input and splits it into separate quiz categories.
+/// Each quiz category consists of a category name and a list of quiz questions.
+/// The text should be formatted with each category separated by empty lines and each quiz question separated by tabs.
+/// The format of each line should be: "answer\tquestion\tnote" (note is optional).
+/// The function returns a list of maps, where each map represents a quiz category and contains the category name and a list of quiz questions.
 List<Map<String, dynamic>> makeQuiz(String text) {
   List<String> pieces = text.trim().split(RegExp(r'\n\s*\n'));
-  List<Map<String, dynamic>> categories = [];
+  List<Map<String, dynamic>> quizzes = [];
 
   for (var piece in pieces) {
     List<String> lines = piece.split('\n');
-    String category = lines[0];
-    List<Map<String, String>> quiz = [];
+    String quiz = lines[0];
+    List<Map<String, String>> questions = [];
 
     for (var i = 1; i < lines.length; i++) {
       List<String> parts = lines[i].split('\t');
-      quiz.add({
+      questions.add({
         'question': parts[1],
         'answer': parts[0],
         'note': parts.length > 2 ? parts[2] : '',
       });
     }
 
-    categories.add({
-      'category': category,
-      'quiz': quiz,
+    quizzes.add({
+      'Quiz': quiz,
+      'Questions': questions,
     });
   }
 
-  return categories;
+  return quizzes;
 }
 
 class QuizManager extends ChangeNotifier {

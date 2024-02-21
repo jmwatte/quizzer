@@ -1,7 +1,7 @@
 [
   {
-    "category": "Multicursor and Selection in VSCode",
-    "quiz": [
+    "Quiz": "Multicursor and Selection in VSCode",
+    "Questions": [
       {
         "question": "Add Cursor Above",
         "answer": "Ctrl+Alt+Up",
@@ -25,8 +25,8 @@
     ]
   },
   {
-    "category": "File Management in VSCode",
-    "quiz": [
+    "Quiz": "File Management in VSCode",
+    "Questions": [
       {
         "question": "New File",
         "answer": "Ctrl+N",
@@ -50,8 +50,8 @@
     ]
   },
   {
-    "category": "Debugging in VSCode",
-    "quiz": [
+    "Quiz": "Debugging in VSCode",
+    "Questions": [
       {
         "question": "Start Debugging",
         "answer": "F5",

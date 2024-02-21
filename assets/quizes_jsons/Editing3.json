@@ -1,6 +1,6 @@
 {
-  "category": "Editing in VSCode",
-  "quiz": [
+  "Quiz": "Editing in VSCode",
+  "Questions": [
     {
       "question": "Cut Line (empty selection)",
       "answer": "Ctrl+X",

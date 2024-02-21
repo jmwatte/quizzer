@@ -31,7 +31,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
   QuizQuestion? correctAnswer;
   QuizQuestion? selectedAnswer;
   Color backgroundColor = Colors.white;
-  late QuizCategory category;
+  late Quiz quiz;
   List<QuizQuestion>? remainingQuestions;
   late Map<QuizQuestion, int> correctAnswers;
   late Map<QuizQuestion, int> incorrectAnswers;
@@ -63,20 +63,20 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final selectedCategory = di<CategoryProvider>().selectedCategory;
-    if (selectedCategory == null) {
-      throw StateError('No category selected');
+    final selectedQuiz = di<QuizProvider>().selectedQuiz;
+    if (selectedQuiz == null) {
+      throw StateError('No quiz selected');
     }
-    category = selectedCategory.sortQuiz(selectedCategory.selectedSortType);
+    quiz = selectedQuiz.sortQuiz(selectedQuiz.selectedSortType);
 //here we can add the logic to sort the questions and answers
 
     incorrectAnswers = <QuizQuestion, int>{};
-    remainingQuestions = List.from(category.quizQuestions);
+    remainingQuestions = List.from(quiz.quizQuestions);
     correctAnswers = <QuizQuestion, int>{};
     if (remainingQuestions == null) {
       throw StateError('remainingQuestions is null');
     } else {
-      switch (category.randomQuestions) {
+      switch (quiz.randomQuestions) {
         case true:
           currentQuestion =
               remainingQuestions![Random().nextInt(remainingQuestions!.length)];
@@ -126,7 +126,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
             ifAbsent: () => questionTime);
       }
       // If it's a testQuiz, remove the question whether it's answered correctly or not
-      if (category.isTestQuiz || answer == currentQuestion) {
+      if (quiz.isTestQuiz || answer == currentQuestion) {
         remainingQuestions!.remove(currentQuestion);
       }
     });
@@ -149,7 +149,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
             // Check if there are any questions left
             QuizQuestion newQuestion;
             //if random is true then we randomize the questions
-            if (category.randomQuestions) {
+            if (quiz.randomQuestions) {
               do {
                 if (remainingQuestions!.length > 1) {
                   do {
@@ -187,7 +187,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
               context,
               MaterialPageRoute(
                 builder: (context) => ResultsScreen(
-                  category: category.category,
+                  title: quiz.title,
                   incorrectAnswers: incorrectAnswers,
                   correctAnswers: correctAnswers,
                   questionTimes: questionTimes,
@@ -251,12 +251,15 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
       body: Column(
         children: [
           ListTile(
+            tileColor: Theme.of(context).brightness == Brightness.dark
+                ? const Color.fromARGB(255, 99, 83, 16)
+                : Colors.yellow[400],
             title: Text(
               isSwapped ? currentQuestion.answer : currentQuestion.question,
               style: const TextStyle(
                 fontSize: 24, // Change this to your desired font size
                 fontWeight: FontWeight.bold, // Make the text bold
-                color: Colors.black, // Change this to your desired color
+                // color: Colors.black, // Change this to your desired color
               ),
               textAlign:
                   TextAlign.center, // Center the text within the Text widget
@@ -267,7 +270,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                   : ' ',
               style: const TextStyle(
                 fontSize: 16, // Change this to your desired font size
-                color: Colors.black, // Change this to your desired color
+                // color: Colors.black, // Change this to your desired color
               ),
               textAlign:
                   TextAlign.center, // Center the text within the Text widget
@@ -276,7 +279,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
               final updatedItem = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ConstructQuizScreen(item: category),
+                  builder: (context) => ConstructQuizScreen(item: quiz),
                 ),
               );
               if (updatedItem != null) {
@@ -286,7 +289,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
 
                   ql.updateQuiz(updatedItem);
                   // QuizCategory object with the updated one
-                  category = updatedItem;
+                  quiz = updatedItem;
                 });
               }
             },
@@ -295,43 +298,51 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
           switch (watchPropertyValue(
               (QuizListProvider m) => m.selectedQuestionType)) {
             QuestionType.multipleChoices => Expanded(
-                child: ListView(
-                  children: answers
-                      .map(
-                        (answer) => ListTile(
-                          onTap: () => answerQuestion(answer),
-                          // Set the tileColor based on the correctness of the answer
-                          tileColor: answer == correctAnswer
+                child: ListView.builder(
+                  itemCount: answers.length,
+                  itemBuilder: (context, index) {
+                    final answer = answers[index];
+                    return ListTile(
+                      onTap: () => answerQuestion(answer),
+                      // Set the tileColor based on the correctness of the answer
+                      tileColor: correctAnswer == null
+                          ? index % 2 == 0
+                              ? Theme.of(context).brightness == Brightness.dark
+                                  ? const Color.fromARGB(255, 6, 82, 145)
+                                  : const Color.fromARGB(255, 77, 178, 250)
+                              : Theme.of(context).brightness == Brightness.dark
+                                  ? const Color.fromARGB(255, 53, 146, 212)
+                                  : const Color.fromARGB(255, 67, 156, 229)
+                          : answer == correctAnswer
                               ? Colors.green // Correct answer is green
                               : answer == selectedAnswer
                                   ? Colors.red // Selected answer is red
                                   : null, // Default color for other answers
-                          title: ListTile(
-                            title: Visibility(
-                              visible: answers.length > 1,
-                              child: Text(
-                                isSwapped ? answer.question : answer.answer,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize:
-                                      18, // Change this to your desired font size
-                                ),
-                              ),
-                            ),
-                            subtitle: Text(
-                              (isSwapped && answer.note.isNotEmpty)
-                                  ? '(${answer.note})' // Show note if answer is swapped and note is not empty
-                                  : ' ',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize:
-                                    16, // Change this to your desired font size
-                              ),
+                      title: ListTile(
+                        title: Visibility(
+                          visible: answers.length > 1,
+                          child: Text(
+                            isSwapped ? answer.question : answer.answer,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize:
+                                  18, // Change this to your desired font size
                             ),
                           ),
                         ),
-                      )
-                      .toList(),
+                        subtitle: Text(
+                          (isSwapped && answer.note.isNotEmpty)
+                              ? '(${answer.note})' // Show note if answer is swapped and note is not empty
+                              : ' ',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize:
+                                16, // Change this to your desired font size
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             QuestionType.study => ListTile(
@@ -340,18 +351,20 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                 tileColor: Colors.green, // Correct answer is green
 
                 title: ListTile(
-                  title: Text(
-                    isSwapped
-                        ? currentQuestion.question
-                        : currentQuestion.answer,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 18, // Change this to your desired font size
+                  title: FittedBox(
+                    child: Text(
+                      isSwapped
+                          ? splitLongString(currentQuestion.question)
+                          : splitLongString(currentQuestion.answer),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 18, // Change this to your desired font size
+                      ),
                     ),
                   ),
                   subtitle: Text(
                     (isSwapped && currentQuestion.note.isNotEmpty)
-                        ? '(${currentQuestion.note})' // Show note if answer is swapped and note is not empty
+                        ? '(${splitLongString(currentQuestion.note)})' // Show note if answer is swapped and note is not empty
                         : ' ',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
@@ -365,19 +378,21 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                   children: [
                     _isLongPressing
                         ? ListTile(
-                            title: Text(
-                              isSwapped
-                                  ? currentQuestion.question
-                                  : currentQuestion.answer,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize:
-                                    18, // Change this to your desired font size
+                            title: FittedBox(
+                              child: Text(
+                                isSwapped
+                                    ? splitLongString(currentQuestion.question)
+                                    : splitLongString(currentQuestion.answer),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize:
+                                      18, // Change this to your desired font size
+                                ),
                               ),
                             ),
                             subtitle: Text(
                               (isSwapped && currentQuestion.note.isNotEmpty)
-                                  ? '(${currentQuestion.note})' // Show note if answer is swapped and note is not empty
+                                  ? '(${splitLongString(currentQuestion.note)})' // Show note if answer is swapped and note is not empty
                                   : ' ',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
@@ -425,7 +440,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
 //
   List<QuizQuestion> _generateAnswers() {
     final answers = [currentQuestion];
-    final incorrectAnswers = category.quizQuestions
+    final incorrectAnswers = quiz.quizQuestions
         .where((shortcut) => shortcut != currentQuestion)
         .toList();
     int amountOfAlternatives = di<QuizListProvider>().amountOfAnswers;

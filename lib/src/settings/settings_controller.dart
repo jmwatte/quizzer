@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:watch_it/watch_it.dart';
 
 import 'settings_service.dart';
 
@@ -9,8 +10,8 @@ import 'settings_service.dart';
 /// Controllers glue Data Services to Flutter Widgets. The SettingsController
 /// uses the SettingsService to store and retrieve user settings.
 class SettingsController with ChangeNotifier {
-  SettingsController(this._settingsService);
-
+  //SettingsController(this._settingsService);
+  SettingsController() : _settingsService = di.get<SettingsService>();
   // Make SettingsService a private variable so it is not used directly.
   final SettingsService _settingsService;
 
@@ -48,7 +49,8 @@ class SettingsController with ChangeNotifier {
     // SettingService.
     await _settingsService.updateThemeMode(newThemeMode);
   }
-    void resetDatabase() async {
+
+  void resetDatabase() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isFirstRun', true);
     notifyListeners();

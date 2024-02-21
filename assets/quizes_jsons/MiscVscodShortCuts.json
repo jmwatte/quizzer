@@ -1,6 +1,6 @@
 {
-    "category": "Navigating within a File in VSCode",
-    "quiz": [
+    "Quiz": "Navigating within a File in VSCode",
+    "Questions": [
         {
             "question": "Accept First Quick Fix",
             "answer": "Ctrl+. then Enter",

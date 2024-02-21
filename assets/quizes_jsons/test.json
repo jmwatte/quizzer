@@ -1,6 +1,6 @@
 {
-  "category": "testing VSCode",
-  "quiz": [
+  "Quiz": "testing VSCode",
+  "Questions": [
    
     {
       "question": "Go to Beginning of Line",

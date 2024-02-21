@@ -3,7 +3,7 @@ import 'helpers.dart';
 import 'quiz_question.dart';
 
 class ResultsScreen extends StatelessWidget {
-  final String category;
+  final String title;
   final Map<QuizQuestion, int> correctAnswers;
   final Map<QuizQuestion, int> incorrectAnswers;
   final Map<QuizQuestion, Duration> correctAnswersTimes;
@@ -12,7 +12,7 @@ class ResultsScreen extends StatelessWidget {
   final Duration totalTime;
 
   const ResultsScreen({
-    required this.category,
+    required this.title,
     required this.correctAnswers,
     required this.incorrectAnswers,
     required this.correctAnswersTimes,
@@ -35,7 +35,7 @@ class ResultsScreen extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text(category),
+            title: Text(title),
           ),
           body: ListView.builder(
             itemCount: sortedEntries.length,

@@ -1,7 +1,7 @@
 [
     {
-        "category": "SimpleVim:Operators",
-        "quiz": [
+        "Quiz": "SimpleVim:Operators",
+        "Questions": [
             {
                 "question": "Delete range.",
                 "answer": "d"
@@ -25,8 +25,8 @@
         ]
     },
     {
-        "category": "SimpleVim:OperatorRanges",
-        "quiz": [
+        "Quiz": "SimpleVim:OperatorRanges",
+        "Questions": [
             {
                 "question": "Character under cursor.",
                 "answer": "l"
@@ -146,8 +146,8 @@
         ]
     },
     {
-        "category": "SimpleVim:Motions",
-        "quiz": [
+        "Quiz": "SimpleVim:Motions",
+        "Questions": [
             {
                 "question": "Character right.",
                 "answer": "l"
@@ -243,8 +243,8 @@
         ]
     },
     {
-        "category": "SimpleVim:Actions",
-        "quiz": [
+        "Quiz": "SimpleVim:Actions",
+        "Questions": [
             {
                 "question": "Enter Insert mode.",
                 "answer": "i"

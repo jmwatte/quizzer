@@ -1,6 +1,6 @@
 {
-  "category": "Hiding and Showing Panes in VSCode",
-  "quiz": [
+  "Quiz": "Hiding and Showing Panes in VSCode",
+  "Questions": [
     {
       "question": "Toggle Sidebar Visibility",
       "answer": "Ctrl+j S",

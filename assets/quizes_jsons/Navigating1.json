@@ -1,6 +1,6 @@
 {
-  "category": "Navigating around VSCode",
-  "quiz": [
+  "Quiz": "Navigating around VSCode",
+  "Questions": [
     {
       "question": "Go to File",
       "answer": "Ctrl+P",

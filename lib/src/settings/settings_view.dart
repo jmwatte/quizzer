@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_const
 
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -12,23 +11,24 @@ import '../sample_feature/quiz_categories.dart';
 import '../sample_feature/sorting_handler.dart';
 import 'settings_controller.dart';
 import '/src/sample_feature/helpers.dart';
-import '/src/sample_feature/database_helpers.dart';
+//import '/src/sample_feature/database_helpers.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///
 /// When a user changes a setting, the SettingsController is updated and
 /// Widgets that listen to the SettingsController are rebuilt.
 class SettingsView extends StatelessWidget with WatchItMixin {
-  final VoidCallback onResetDatabase;
+  //final VoidCallback onResetDatabase;
   SettingsView(
-      {super.key, required this.controller, required this.onResetDatabase});
+      {super.key}); //, required this.controller, required this.onResetDatabase});
 
   static const routeName = '/settings';
-  final SettingsController controller;
-  final DatabaseHelper dbhelper = DatabaseHelper();
+  // final SettingsController controller;
+  // final DatabaseHelper dbhelper = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
+    final controller = di.get<SettingsController>();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Settings'),
@@ -82,9 +82,12 @@ class SettingsView extends StatelessWidget with WatchItMixin {
                           await File(result.files.single.path!).readAsString();
                       // Convert the text to a Quiz object.
                       var quiz = makeQuiz(text);
-                      String jsonData = jsonEncode(quiz);
+                      // String jsonData = jsonEncode(quiz);
                       //save the quiz as a json file in the app's documents directory.
-                      await saveQuiz(jsonData);
+                      //await saveQuiz(jsonData);
+                      Quiz quizCategory = Quiz.fromJson(quiz[0]);
+
+                      di<QuizListProvider>().saveQuizToDatabase(quizCategory);
                     }
                   }),
             ),
@@ -288,8 +291,8 @@ class SettingsView extends StatelessWidget with WatchItMixin {
       context,
       MaterialPageRoute(
           builder: (context) => ConstructQuizScreen(
-                  item: QuizCategory(
-                category: 'change me',
+                  item: Quiz(
+                title: 'change me',
                 quizQuestions: [],
                 randomQuestions: false,
                 isTestQuiz: false,
@@ -308,6 +311,7 @@ class SettingsView extends StatelessWidget with WatchItMixin {
     // }
   }
 
+//this method is not used in this app
   Future<void> saveQuiz(jsonData) async {
     // Write the JSON data to a file
     FilePickerResult? result = (await FilePicker.platform.saveFile(
