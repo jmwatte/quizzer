@@ -5,21 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "restart_testing_app",
+            "name": "restart_quizzer2",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "restart_testing_app (profile mode)",
+            "name": "restart_quizzer2 (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "restart_testing_app (release mode)",
+            "name": "restart_quizzer2 (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
-        }
-    ]
+        },
+        
+{
+            "name": "Debug My quiz_maker_dart",
+            "program": "lib\\src\\sample_feature\\quiz_maker.dart",
+            "request": "launch",
+            "type": "dart"
+        }    ]
 }
