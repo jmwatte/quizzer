@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_reorderable_list/flutter_reorderable_list.dart';
 import '/src/sample_feature/database_helpers.dart';
 import '/src/sample_feature/helpers.dart';
-import '/src/sample_feature/quiz_categories.dart';
+import '../../sample_feature/quiz.dart';
 import '/src/sample_feature/quiz_question.dart';
 import 'package:undo/undo.dart';
 import 'package:watch_it/watch_it.dart';
@@ -99,7 +99,7 @@ class ConstructQuizScreenState extends State<ConstructQuizScreen> {
     }
     // Load the updated list of quizzes from the database
     quizListProvider.loadQuizzesFromDatabase();
-    // Return the updated QuizCategory object
+    // Return the updated Quiz object
     Navigator.pop(context, item);
   }
 
@@ -170,7 +170,7 @@ class ConstructQuizScreenState extends State<ConstructQuizScreen> {
                 });
               },
               decoration: const InputDecoration(
-                labelText: 'Category',
+                labelText: 'Quiz',
               ),
             ),
           ),

@@ -9,7 +9,7 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'quiz_categories.dart';
+import 'quiz.dart';
 import 'quiz_question.dart';
 
 class DatabaseHelper {
@@ -93,7 +93,7 @@ class DatabaseHelper {
     return updatedQuiz;
   }
 
-//here we delete the Quizes and all the questions that are in that quiz and have the same categoryId
+//here we delete the Quizes and all the questions that are in that quiz and have the same quizId
   Future<int> deleteQuizAndQuestions(int id) async {
     var dbClient = await db;
     int res = await dbClient!.delete("Quiz", where: "id = ?", whereArgs: [id]);

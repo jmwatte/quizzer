@@ -1,33 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'helpers.dart';
 
-// List<Map<String, dynamic>> makeQuiz(String text) {
-//   List<String> pieces = text.trim().split(RegExp(r'\n\s*\n'));
-//   List<Map<String, dynamic>> categories = [];
-
-//   for (var piece in pieces) {
-//     List<String> lines = piece.split('\n');
-//     String category = lines[0];
-//     List<Map<String, String>> quiz = [];
-
-//     for (var i = 1; i < lines.length; i++) {
-//       List<String> parts = lines[i].split('\t');
-//       quiz.add({
-//         'question': parts[1],
-//         'answer': parts[0],
-//       });
-//     }
-
-//     categories.add({
-//       'category': category,
-//       'quiz': quiz,
-//     });
-//   }
-
-//   return categories;
-// }
 void main() async {
   String text = """
   

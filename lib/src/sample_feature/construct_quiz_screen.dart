@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import 'database_helpers.dart';
 import 'helpers.dart';
-import 'quiz_categories.dart';
+import 'quiz.dart';
 import 'quiz_question.dart';
 import 'package:undo/undo.dart';
 
@@ -99,7 +99,7 @@ class ConstructQuizScreenState extends State<ConstructQuizScreen> {
     }
     // Load the updated list of quizzes from the database
     quizListProvider.loadQuizzesFromDatabase();
-    // Return the updated QuizCategory object
+    // Return the updated quiz
     Navigator.pop(context, item);
   }
 

@@ -3,7 +3,7 @@ import 'package:path/path.dart' as path;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'database_helpers.dart';
-import 'quiz_categories.dart';
+import 'quiz.dart';
 import 'quiz_question.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -144,9 +144,9 @@ class QuizListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Retrieves a list of QuizCategory objects by loading quizzes from the database.
+  /// Retrieves a list of Quiz objects by loading quizzes from the database.
   ///
-  /// Returns a Future that resolves to a List of QuizCategory objects.
+  /// Returns a Future that resolves to a List of Quiz objects.
   /// The list of quizzes is obtained by calling the `loadQuizzesFromDatabase` method
   /// of the `DatabaseHelper` class. After loading the quizzes, the `notifyListeners`
   /// method is called to notify any listeners of changes. Finally, the list of quizzes
@@ -167,16 +167,6 @@ class QuizListProvider extends ChangeNotifier {
     quizzes = await dbHelper.loadQuizzesFromDatabase();
     notifyListeners();
   }
-  // void loadQuizzes() async {
-  //   var dbHelper = DatabaseHelper();
-  //   quizzes = await dbHelper.loadQuizzesFromDatabase();
-  //   notifyListeners();
-  // }
-
-  // void addQuiz(QuizCategory quiz) {
-  //   quizzes.add(quiz);
-  //   notifyListeners();
-  // }
 
   /// Updates the given [quiz] in the list of quizzes.
   ///
@@ -192,9 +182,9 @@ class QuizListProvider extends ChangeNotifier {
 
   /// Saves the [quiz] to the database.
   ///
-  /// If the [quiz] does not have an ID, it saves the [quiz] category to the database
+  /// If the [quiz] does not have an ID, it saves the [quiz] quiz to the database
   /// and assigns the generated ID to the [quiz]. Otherwise, it updates the existing
-  /// [quiz] category in the database.
+  /// [quiz] quiz in the database.
   void saveQuizToDatabase(Quiz quiz) async {
     var dbHelper = DatabaseHelper();
     if (quiz.id == null) {
@@ -208,12 +198,12 @@ class QuizListProvider extends ChangeNotifier {
 
   /// Deletes a quiz from the database.
   ///
-  /// This function takes a [Quiz] object as a parameter and deletes the corresponding quiz category from the database.
+  /// This function takes a [Quiz] object as a parameter and deletes the corresponding quiz from the database.
   /// It uses the [DatabaseHelper] class to perform the deletion operation.
   ///
   /// Example usage:
   /// ```dart
-  /// QuizCategory quiz = QuizCategory(id: 1, name: 'History');
+  /// Quiz quiz = Quiz(id: 1, name: 'History');
   /// deleteQuizFromDatabase(quiz);
   /// ```
   void deleteQuizFromDatabase(Quiz quiz) async {
@@ -235,11 +225,11 @@ String formatDuration(Duration duration) {
 
 /// Parses a text into a list of quiz categories and their corresponding quizzes.
 ///
-/// This function takes a [text] string as input and splits it into separate quiz categories.
-/// Each quiz category consists of a category name and a list of quiz questions.
-/// The text should be formatted with each category separated by empty lines and each quiz question separated by tabs.
+/// This function takes a [text] string as input and splits it into separate quizzes.
+/// Each quiz consists of a quit titlename and a list of quiz questions.
+/// The text should be formatted with each quiz separated by empty lines and each quiz question separated by tabs.
 /// The format of each line should be: "answer\tquestion\tnote" (note is optional).
-/// The function returns a list of maps, where each map represents a quiz category and contains the category name and a list of quiz questions.
+/// The function returns a list of maps, where each map represents a quiz  and contains the quiz name and a list of quiz questions.
 List<Map<String, dynamic>> makeQuiz(String text) {
   List<String> pieces = text.trim().split(RegExp(r'\n\s*\n'));
   List<Map<String, dynamic>> quizzes = [];

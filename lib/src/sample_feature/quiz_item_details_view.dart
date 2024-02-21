@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import 'construct_quiz_screen.dart';
 import 'helpers.dart';
-import 'quiz_categories.dart';
+import 'quiz.dart';
 import 'quiz_result_screen.dart';
 import 'quiz_question.dart';
 
@@ -288,7 +288,7 @@ class QuizItemDetailsViewState extends State<QuizItemDetailsView> {
                   var ql = di<QuizListProvider>();
 
                   ql.updateQuiz(updatedItem);
-                  // QuizCategory object with the updated one
+                  // Quiz object with the updated one
                   quiz = updatedItem;
                 });
               }

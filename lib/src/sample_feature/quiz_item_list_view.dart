@@ -5,7 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'database_helpers.dart';
 import 'construct_quiz_screen.dart';
 import 'helpers.dart';
-import 'quiz_categories.dart';
+import 'quiz.dart';
 import '../settings/settings_view.dart';
 import 'quiz_item_details_view.dart';
 import 'sorting_handler.dart';

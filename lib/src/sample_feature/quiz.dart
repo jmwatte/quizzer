@@ -3,15 +3,6 @@ import 'package:flutter/material.dart';
 import 'quiz_question.dart';
 import 'sorting_handler.dart';
 
-// enum SortType {
-//   original,
-//   reversed,
-//   question,
-//   questionReversed,
-//   answer,
-//   answerReversed,
-// }
-
 class Quiz {
   int? id;
   String title;
@@ -52,7 +43,6 @@ class Quiz {
     );
   }
 
-  //get id => null;
   @override
   String toString() {
     return 'Quiz{id: $id, title: $title, randomQuestions: $randomQuestions, isTestQuiz: $isTestQuiz, selectedSortType: $selectedSortType}';
@@ -101,30 +91,18 @@ class Quiz {
       'randomQuestions': randomQuestions ? 1 : 0,
       'isTestQuiz': isTestQuiz ? 1 : 0,
       'selectedSortType': selectedSortType.index,
-      // 'quizQuestions': jsonEncode(quizQuestions.map((q) => q.toMap()).toList()),
     };
     if (id != null) {
-      // Only include the id field in the map if it's not null
       map['id'] = id;
     }
 
     return map;
-    // return {
-    //   'id': id,
-    //   'category': category,
-    //   'randomQuestions': randomQuestions ? 1 : 0,
-    //   'isTestQuiz': isTestQuiz ? 1 : 0,
-    //   'selectedSortType': selectedSortType.index,
-    //  // 'quizQuestions': jsonEncode(quizQuestions.map((q) => q.toMap()).toList()),
-    // };
   }
 
   static Future<Quiz> fromMap(Map<String, dynamic> map) async {
     var dbHelper = DatabaseHelper();
     List<QuizQuestion> quizQuestions =
         await dbHelper.fetchQuizQuestions(map['id']);
-//print(map['randomQuestions'] == 1);  // Add this
-    //print(map['isTestQuiz'] == 1);
     return Quiz(
       id: map['id'],
       title: map['title'],
